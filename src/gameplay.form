@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JFileChooser" name="jFileChooser1">
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="3"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
+              <Component id="serveaButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="menuList" min="-2" pref="78" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="menuText" max="32767" attributes="0"/>
+                          <Component id="breadButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lettuceButton" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="cheeseButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="pattyButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                      <Component id="timeBar" min="-2" pref="198" max="-2" attributes="0"/>
+                      <EmptySpace pref="57" max="32767" attributes="0"/>
+                      <Component id="scoreText" min="-2" pref="71" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="conText" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="scoreField" pref="96" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="menuText" min="-2" max="-2" attributes="0"/>
+                          <Component id="timeBar" min="-2" pref="12" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="menuList" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="142" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="breadButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="pattyButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lettuceButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cheeseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="serveaButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                      <Component id="scoreText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="scoreField" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="conText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="breadButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Bread"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="lettuceButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Lettuce"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="pattyButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Patty"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="cheeseButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cheese"/>
+      </Properties>
+      <Events>
+        <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="cheeseButtonHierarchyChanged"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cheeseButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="serveaButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Serve"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="menuText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Menu"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="timeBar">
+    </Component>
+    <Component class="javax.swing.JLabel" name="scoreText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Score"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="scoreField">
+    </Component>
+    <Component class="javax.swing.JLabel" name="conText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Coin"/>
+      </Properties>
+    </Component>
+    <Component class="java.awt.List" name="menuList">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="fddvvdvd" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuListActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextPane" name="jTextPane1">
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
