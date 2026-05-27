@@ -45,6 +45,8 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
 
     public gameplay() {
     initComponents();
+    //setSize(800, 600);
+    setLocationRelativeTo(null);
 
     //image
     breadImg = new ImageIcon(
@@ -211,8 +213,8 @@ public void paint(Graphics g) {
 
     super.paint(g);
 
-    int x = 120;
-    int y = 150;
+    int x = 180;
+    int y = 300;
 
    for (int i = 0; i < burger.size(); i++) {
 
