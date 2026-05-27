@@ -4,11 +4,33 @@
   <NonVisualComponents>
     <Component class="javax.swing.JFileChooser" name="jFileChooser1">
     </Component>
+    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="jMenu1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Menu"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Main Menu"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Edit"/>
+          </Properties>
+        </Menu>
+      </SubComponents>
+    </Menu>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -29,22 +51,41 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="menuList" min="-2" pref="78" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="menuText" max="32767" attributes="0"/>
                           <Component id="breadButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="lettuceButton" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="menuList" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
+                          <Component id="menuText" min="-2" pref="72" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="cheeseButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="tomatoButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="salmonButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="pattyButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="onionButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="eggButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -55,13 +96,12 @@
                               </Group>
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="cheeseButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="pattyButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="trashButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="serveaButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -74,41 +114,39 @@
                   </Group>
               </Group>
           </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
-              <Component id="serveaButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="menuText" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="timeBar" min="-2" pref="12" max="-2" attributes="0"/>
+                          <Component id="menuText" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="menuList" min="-2" pref="118" max="-2" attributes="0"/>
-                      <EmptySpace pref="158" max="32767" attributes="0"/>
+                      <EmptySpace pref="131" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="breadButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="pattyButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="onionButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="trashButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="eggButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lettuceButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cheeseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tomatoButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="serveaButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="salmonButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="serveaButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       <Component id="scoreText" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="scoreField" min="-2" max="-2" attributes="0"/>
@@ -128,6 +166,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Bread"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="breadButtonMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="lettuceButton">
       <Properties>
@@ -138,6 +179,10 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Patty"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="pattyButtonMouseMoved"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pattyButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cheeseButton">
       <Properties>
@@ -145,6 +190,7 @@
       </Properties>
       <Events>
         <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="cheeseButtonHierarchyChanged"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cheeseButtonMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cheeseButtonActionPerformed"/>
       </Events>
     </Component>
@@ -155,7 +201,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="menuText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Menu"/>
+        <Property name="text" type="java.lang.String" value="Order"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JProgressBar" name="timeBar">
@@ -191,5 +237,37 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="onionButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Onion"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="tomatoButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="tomato"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="trashButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Trash"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="trashButtonMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trashButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="eggButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Egg"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="salmonButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salmon"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salmonButtonActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

@@ -42,7 +42,12 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     Image pattyImg;
     Image cheeseImg;
     Image lettuceImg;
+    Image eggImg;
+    Image salmonImg;
+    Image tomatoImg;
+    Image onionImg;
 
+    //tes
     public gameplay() {
     initComponents();
     //setSize(800, 600);
@@ -64,6 +69,18 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     lettuceImg = new ImageIcon(
             getClass().getResource("/asset/lettuce.png")
     ).getImage();
+    eggImg = new ImageIcon(
+            getClass().getResource("/asset/egg.png")
+    ).getImage();
+    salmonImg = new ImageIcon(
+            getClass().getResource("/asset/salmon.png")
+    ).getImage();
+    tomatoImg = new ImageIcon(
+            getClass().getResource("/asset/tomato.png")
+    ).getImage();
+    onionImg = new ImageIcon(
+            getClass().getResource("/asset/onion.png")
+    ).getImage();
 
     setResizable(false);
 
@@ -71,7 +88,14 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     lettuceButton.addActionListener(this);
     pattyButton.addActionListener(this);
     cheeseButton.addActionListener(this);
+    eggButton.addActionListener(this);
+    salmonButton.addActionListener(this);
+    onionButton.addActionListener(this);
+    tomatoButton.addActionListener(this);
+
     serveaButton.addActionListener(this);
+  
+    
 
     cheeseButton.setText("Cheese");
 
@@ -97,14 +121,42 @@ void startTimer() {
 
             timeBar.setValue(time);
 
-            if (time <= 0) {
+           if (time <= 0) {
 
-                JOptionPane.showMessageDialog(
+                gameTimer.stop();
+
+                int pilihan = JOptionPane.showConfirmDialog(
                         null,
-                        "Time Up!\nGame Over"
+                        "Time Up!\nMain Lagi?",
+                        "Game Over",
+                        JOptionPane.YES_NO_OPTION
                 );
 
-                System.exit(0);
+                if (pilihan == JOptionPane.YES_OPTION) {
+
+                    // reset game
+                    score = 0;
+                    coin = 0;
+                    time = 100;
+
+                    burger.clear();
+                    order.clear();
+
+                    scoreField.setText("0");
+                    jTextPane1.setText("0");
+
+                    timeBar.setValue(time);
+
+                    generateOrder();
+
+                    repaint();
+
+                    gameTimer.start();
+
+                } else {
+
+                    System.exit(0);
+                }
             }
         }
     });
@@ -123,7 +175,11 @@ void startTimer() {
         "Bread",
         "Patty",
         "Cheese",
-        "Lettuce"
+        "Lettuce",
+        "Salmon",
+        "Egg",
+        "Onion",
+        "Tomato"
     };
 
     int total = random.nextInt(3) + 3;
@@ -202,6 +258,18 @@ public void actionPerformed(ActionEvent e) {
     if (e.getSource() == lettuceButton) {
         addIngredient("Lettuce");
     }
+    if (e.getSource() == tomatoButton) {
+        addIngredient("Tomato");
+    }
+    if (e.getSource() == salmonButton) {
+        addIngredient("Salmon");
+    }
+    if (e.getSource() == eggButton) {
+        addIngredient("Egg");
+    }
+    if (e.getSource() == onionButton) {
+        addIngredient("Onion");
+    }
 
     if (e.getSource() == serveaButton) {
         serveBurger();
@@ -263,6 +331,38 @@ public void paint(Graphics g) {
             offsetY = 8;
 
             break;
+        
+        case "Tomato":
+
+            currentImage = tomatoImg;
+
+            height = 13;
+
+            break;
+
+        case "Egg":
+
+            currentImage = eggImg;
+
+            height = 13;
+
+            break;
+
+        case "Salmon":
+
+            currentImage = salmonImg;
+
+            height = 26;
+
+            break;
+
+        case "Onion":
+
+            currentImage = onionImg;
+
+            height = 13;
+
+            break;
     }
 
     if (currentImage != null) {
@@ -304,22 +404,47 @@ public void paint(Graphics g) {
         menuList = new java.awt.List();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        onionButton = new javax.swing.JButton();
+        tomatoButton = new javax.swing.JButton();
+        trashButton = new javax.swing.JButton();
+        eggButton = new javax.swing.JButton();
+        salmonButton = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         breadButton.setText("Bread");
+        breadButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                breadButtonMouseClicked(evt);
+            }
+        });
 
         lettuceButton.setText("Lettuce");
 
         pattyButton.setText("Patty");
+        pattyButton.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                pattyButtonMouseMoved(evt);
+            }
+        });
+        pattyButton.addActionListener(this::pattyButtonActionPerformed);
 
         cheeseButton.setText("Cheese");
         cheeseButton.addHierarchyListener(this::cheeseButtonHierarchyChanged);
+        cheeseButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cheeseButtonMouseClicked(evt);
+            }
+        });
         cheeseButton.addActionListener(this::cheeseButtonActionPerformed);
 
         serveaButton.setText("Serve");
 
-        menuText.setText("Menu");
+        menuText.setText("Order");
 
         scoreText.setText("Score");
 
@@ -330,24 +455,68 @@ public void paint(Graphics g) {
 
         jScrollPane1.setViewportView(jTextPane1);
 
+        onionButton.setText("Onion");
+
+        tomatoButton.setText("tomato");
+
+        trashButton.setText("Trash");
+        trashButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                trashButtonMouseClicked(evt);
+            }
+        });
+        trashButton.addActionListener(this::trashButtonActionPerformed);
+
+        eggButton.setText("Egg");
+
+        salmonButton.setText("Salmon");
+        salmonButton.addActionListener(this::salmonButtonActionPerformed);
+
+        jMenu1.setText("Menu");
+
+        jMenuItem1.setText("Main Menu");
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(menuList, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(menuText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(breadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lettuceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(lettuceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(menuList, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(menuText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cheeseButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(tomatoButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(salmonButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(pattyButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(onionButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(eggButton)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -357,46 +526,44 @@ public void paint(Graphics g) {
                                     .addComponent(jScrollPane1))
                                 .addGap(17, 17, 17))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cheeseButton)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(pattyButton)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(trashButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(serveaButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(33, 33, 33))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
                         .addComponent(timeBar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                         .addComponent(scoreText, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(217, 217, 217)
-                .addComponent(serveaButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(menuText)
-                            .addComponent(timeBar, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(timeBar, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(menuText))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(menuList, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(breadButton)
-                            .addComponent(pattyButton))
+                            .addComponent(pattyButton)
+                            .addComponent(onionButton)
+                            .addComponent(trashButton)
+                            .addComponent(eggButton))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lettuceButton)
-                            .addComponent(cheeseButton))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(serveaButton)
-                        .addGap(12, 12, 12))
+                            .addComponent(cheeseButton)
+                            .addComponent(tomatoButton)
+                            .addComponent(serveaButton)
+                            .addComponent(salmonButton))
+                        .addGap(41, 41, 41))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
                         .addComponent(scoreText)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scoreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -421,6 +588,36 @@ public void paint(Graphics g) {
     private void menuListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuListActionPerformed
+
+    private void pattyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pattyButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pattyButtonActionPerformed
+
+    private void pattyButtonMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pattyButtonMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pattyButtonMouseMoved
+
+    private void cheeseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cheeseButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cheeseButtonMouseClicked
+
+    private void salmonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salmonButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salmonButtonActionPerformed
+
+    private void trashButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trashButtonMouseClicked
+        // TODO add your handling code here:
+        burger.clear();
+        repaint();
+    }//GEN-LAST:event_trashButtonMouseClicked
+
+    private void breadButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_breadButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_breadButtonMouseClicked
+
+    private void trashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trashButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_trashButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,16 +648,25 @@ public void paint(Graphics g) {
     private javax.swing.JButton breadButton;
     private javax.swing.JButton cheeseButton;
     private javax.swing.JLabel conText;
+    private javax.swing.JButton eggButton;
     private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JButton lettuceButton;
     private java.awt.List menuList;
     private javax.swing.JLabel menuText;
+    private javax.swing.JButton onionButton;
     private javax.swing.JButton pattyButton;
+    private javax.swing.JButton salmonButton;
     private javax.swing.JTextField scoreField;
     private javax.swing.JLabel scoreText;
     private javax.swing.JButton serveaButton;
     private javax.swing.JProgressBar timeBar;
+    private javax.swing.JButton tomatoButton;
+    private javax.swing.JButton trashButton;
     // End of variables declaration//GEN-END:variables
 }
