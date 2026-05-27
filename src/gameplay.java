@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JOptionPane;
-
+import javax.swing.Timer;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 /**
  *
  * @author msi
@@ -26,12 +28,43 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     Random random = new Random();
 
     int score = 0;
+
+    int coin = 0;
+
+    int time = 100;
+
+    Timer gameTimer;
     /**
      * Creates new form tes
      */
+    //image
+    Image breadImg;
+    Image pattyImg;
+    Image cheeseImg;
+    Image lettuceImg;
+
     public gameplay() {
     initComponents();
+
+    //image
+    breadImg = new ImageIcon(
+        getClass().getResource("/asset/bun.png")
+    ).getImage();
+
+    pattyImg = new ImageIcon(
+            getClass().getResource("/asset/beef.png")
+    ).getImage();
+
+    cheeseImg = new ImageIcon(
+            getClass().getResource("/asset/cheese.png")
+    ).getImage();
+
+    lettuceImg = new ImageIcon(
+            getClass().getResource("/asset/lettuce.png")
+    ).getImage();
+
     setResizable(false);
+
     breadButton.addActionListener(this);
     lettuceButton.addActionListener(this);
     pattyButton.addActionListener(this);
@@ -40,13 +73,49 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
 
     cheeseButton.setText("Cheese");
 
+    timeBar.setMaximum(100);
+    timeBar.setValue(100);
+
+    scoreField.setText("0");
+    jTextPane1.setText("0");
+
     generateOrder();
+
+    startTimer();
+}
+
+void startTimer() {
+
+    gameTimer = new Timer(100, new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            time--;
+
+            timeBar.setValue(time);
+
+            if (time <= 0) {
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Time Up!\nGame Over"
+                );
+
+                System.exit(0);
+            }
+        }
+    });
+
+    gameTimer.start();
 }
 
     void generateOrder() {
 
     order.clear();
     burger.clear();
+
+    menuList.removeAll();
 
     String[] ingredients = {
         "Bread",
@@ -59,12 +128,14 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
 
     for (int i = 0; i < total; i++) {
 
-        order.add(
-            ingredients[random.nextInt(ingredients.length)]
-        );
-    }
+        String item =
+                ingredients[random.nextInt(
+                        ingredients.length)];
 
-    setTitle("Order: " + order + " | Score: " + score);
+        order.add(item);
+
+        menuList.add(item);
+    }
 
     repaint();
 }
@@ -80,12 +151,23 @@ void serveBurger() {
 
     if (burger.equals(order)) {
 
-        score++;
+        score += 10;
 
-        JOptionPane.showMessageDialog(
-                this,
-                "Correct Burger!"
-        );
+        coin += 5;
+
+        scoreField.setText(String.valueOf(score));
+
+        jTextPane1.setText(String.valueOf(coin));
+
+        
+
+        time = 100;
+
+        if (time > 100) {
+            time = 100;
+        }
+
+        timeBar.setValue(time);
 
         generateOrder();
 
@@ -129,44 +211,73 @@ public void paint(Graphics g) {
 
     super.paint(g);
 
-    
-
-    
-
     int x = 120;
-    int y = 350;
+    int y = 150;
 
-    for (int i = burger.size() - 1; i >= 0; i--) {
+   for (int i = 0; i < burger.size(); i++) {
 
-        String ingredient = burger.get(i);
+    String ingredient = burger.get(i);
 
-        switch (ingredient) {
+    Image currentImage = null;
 
-            case "Bread":
-                g.setColor(new Color(210, 140, 60));
-                break;
+    int height = 0;
 
-            case "Patty":
-                g.setColor(new Color(120, 50, 40));
-                break;
+    int offsetY = 0;
 
-            case "Cheese":
-                g.setColor(Color.YELLOW);
-                break;
+    switch (ingredient) {
 
-            case "Lettuce":
-                g.setColor(Color.GREEN);
-                break;
-        }
+        case "Bread":
 
-        g.fillRect(x, y, 180, 25);
+            currentImage = breadImg;
 
-        g.setColor(Color.BLACK);
+            height = 32;
 
-        g.drawRect(x, y, 180, 25);
+            break;
 
-        y -= 30;
+        case "Patty":
+
+            currentImage = pattyImg;
+
+            height = 26;
+
+            break;
+
+        case "Cheese":
+
+            currentImage = cheeseImg;
+
+            height = 12;
+
+            offsetY = 5;
+
+            break;
+
+        case "Lettuce":
+
+            currentImage = lettuceImg;
+
+            height = 10;
+
+            offsetY = 8;
+
+            break;
     }
+
+    if (currentImage != null) {
+
+        y -= height;
+
+        g.drawImage(
+                currentImage,
+                x,
+                y + offsetY,
+                this
+        );
+
+        // ingredient berikutnya ikut turun
+        y += offsetY;
+    }
+}
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -222,10 +333,6 @@ public void paint(Graphics g) {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(217, 217, 217)
-                .addComponent(serveaButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -241,6 +348,13 @@ public void paint(Graphics g) {
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(conText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(scoreField, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1))
+                                .addGap(17, 17, 17))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(cheeseButton)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
@@ -251,14 +365,11 @@ public void paint(Graphics g) {
                         .addComponent(timeBar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                         .addComponent(scoreText, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(conText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(scoreField, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1))
-                        .addGap(17, 17, 17))))
+                        .addGap(42, 42, 42))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(217, 217, 217)
+                .addComponent(serveaButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,8 +381,8 @@ public void paint(Graphics g) {
                             .addComponent(menuText)
                             .addComponent(timeBar, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(menuList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                        .addComponent(menuList, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(breadButton)
                             .addComponent(pattyButton))
