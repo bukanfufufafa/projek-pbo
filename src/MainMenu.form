@@ -147,7 +147,7 @@
                               <Component id="btnLeaderboard" max="32767" attributes="0"/>
                               <Component id="btnExit" max="32767" attributes="0"/>
                               <Component id="btnShop" pref="329" max="32767" attributes="0"/>
-                              <Component id="btnOrder" max="32767" attributes="0"/>
+                              <Component id="btnResep" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -163,7 +163,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnShop" min="-2" pref="67" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnOrder" min="-2" pref="67" max="-2" attributes="0"/>
+                          <Component id="btnResep" min="-2" pref="67" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnExit" min="-2" pref="67" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -291,7 +291,7 @@
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="btnOrder">
+                <Component class="javax.swing.JLabel" name="btnResep">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="a" green="27" red="60" type="rgb"/>
@@ -303,7 +303,7 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="ORDER"/>
+                    <Property name="text" type="java.lang.String" value="RECIPE BOOK"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                         <BevelBorder>
@@ -320,7 +320,7 @@
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnOrderMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnResepMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>

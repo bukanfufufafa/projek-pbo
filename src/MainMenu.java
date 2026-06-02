@@ -36,7 +36,7 @@ public class MainMenu extends javax.swing.JFrame {
         btnLeaderboard = new javax.swing.JLabel();
         btnExit = new javax.swing.JLabel();
         btnShop = new javax.swing.JLabel();
-        btnOrder = new javax.swing.JLabel();
+        btnResep = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 153, 0));
@@ -101,17 +101,17 @@ public class MainMenu extends javax.swing.JFrame {
         btnShop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnShop.setOpaque(true);
 
-        btnOrder.setBackground(new java.awt.Color(96, 39, 10));
-        btnOrder.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        btnOrder.setForeground(new java.awt.Color(255, 255, 255));
-        btnOrder.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnOrder.setText("ORDER");
-        btnOrder.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 52, 33), new java.awt.Color(146, 91, 53), new java.awt.Color(44, 16, 3), new java.awt.Color(60, 25, 5)));
-        btnOrder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnOrder.setOpaque(true);
-        btnOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnResep.setBackground(new java.awt.Color(96, 39, 10));
+        btnResep.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        btnResep.setForeground(new java.awt.Color(255, 255, 255));
+        btnResep.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnResep.setText("RECIPE BOOK");
+        btnResep.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 52, 33), new java.awt.Color(146, 91, 53), new java.awt.Color(44, 16, 3), new java.awt.Color(60, 25, 5)));
+        btnResep.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnResep.setOpaque(true);
+        btnResep.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnOrderMouseClicked(evt);
+                btnResepMouseClicked(evt);
             }
         });
 
@@ -126,7 +126,7 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(btnLeaderboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnShop, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
-                    .addComponent(btnOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnResep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -139,7 +139,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnShop, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnResep, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -197,12 +197,12 @@ public class MainMenu extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnPlayMouseClicked
 
-    private void btnOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrderMouseClicked
+    private void btnResepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResepMouseClicked
         Order FrameOrder = new Order();
 //        FrameOrder.tampildata();
         FrameOrder.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnOrderMouseClicked
+    }//GEN-LAST:event_btnResepMouseClicked
 
     /**
      * @param args the command line arguments
@@ -242,8 +242,8 @@ public class MainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnExit;
     private javax.swing.JLabel btnLeaderboard;
-    private javax.swing.JLabel btnOrder;
     private javax.swing.JLabel btnPlay;
+    private javax.swing.JLabel btnResep;
     private javax.swing.JLabel btnShop;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

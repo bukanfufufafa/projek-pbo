@@ -53,7 +53,6 @@ public class Order extends javax.swing.JFrame {
         btnHapusBahan = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         taSusunanBahan = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
         cmbBahan = new javax.swing.JComboBox<>();
         btnTambahBahan = new javax.swing.JLabel();
         btnSimpan = new javax.swing.JLabel();
@@ -74,7 +73,7 @@ public class Order extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("DAFTAR RESEP MENU");
+        jLabel2.setText("RECIPE LIST");
 
         jPanel5.setBackground(new java.awt.Color(70, 29, 9));
 
@@ -119,10 +118,15 @@ public class Order extends javax.swing.JFrame {
         btnHapus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnHapus.setForeground(new java.awt.Color(255, 255, 255));
         btnHapus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnHapus.setText("HAPUS TERPILIH");
+        btnHapus.setText("DELETE SELECTED");
         btnHapus.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 153, 153), new java.awt.Color(255, 153, 153), new java.awt.Color(44, 16, 3), new java.awt.Color(153, 0, 0)));
         btnHapus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHapus.setOpaque(true);
+        btnHapus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHapusMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -146,7 +150,7 @@ public class Order extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -157,17 +161,17 @@ public class Order extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Nama Resep");
+        jLabel1.setText("Recipe Name");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Susunan Bahan");
+        jLabel4.setText("Ingredients");
 
         btnHapusBahan.setBackground(new java.awt.Color(253, 140, 0));
         btnHapusBahan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnHapusBahan.setForeground(new java.awt.Color(59, 28, 2));
         btnHapusBahan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnHapusBahan.setText("Hapus Bahan");
+        btnHapusBahan.setText("Delete Ingredient");
         btnHapusBahan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(190, 135, 106), new java.awt.Color(254, 183, 52), new java.awt.Color(54, 20, 2), new java.awt.Color(218, 102, 16)));
         btnHapusBahan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHapusBahan.setOpaque(true);
@@ -182,10 +186,6 @@ public class Order extends javax.swing.JFrame {
         taSusunanBahan.setRows(5);
         jScrollPane2.setViewportView(taSusunanBahan);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Bahan");
-
         cmbBahan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbBahanActionPerformed(evt);
@@ -196,7 +196,7 @@ public class Order extends javax.swing.JFrame {
         btnTambahBahan.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         btnTambahBahan.setForeground(new java.awt.Color(255, 255, 255));
         btnTambahBahan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnTambahBahan.setText("Tambahkan");
+        btnTambahBahan.setText("Add");
         btnTambahBahan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(38, 62, 1), new java.awt.Color(127, 203, 55), new java.awt.Color(47, 31, 2), new java.awt.Color(25, 94, 6)));
         btnTambahBahan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTambahBahan.setOpaque(true);
@@ -210,7 +210,7 @@ public class Order extends javax.swing.JFrame {
         btnSimpan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnSimpan.setForeground(new java.awt.Color(255, 255, 255));
         btnSimpan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnSimpan.setText("SIMPAN RESEP BARU");
+        btnSimpan.setText("SAVE NEW RECIPE");
         btnSimpan.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(38, 62, 1), new java.awt.Color(127, 203, 55), new java.awt.Color(47, 31, 2), new java.awt.Color(25, 94, 6)));
         btnSimpan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSimpan.setOpaque(true);
@@ -224,7 +224,7 @@ public class Order extends javax.swing.JFrame {
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnUpdate.setText("UPDATE TERPILIH");
+        btnUpdate.setText("UPDATE SELECTED");
         btnUpdate.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(38, 62, 1), new java.awt.Color(127, 203, 55), new java.awt.Color(47, 31, 2), new java.awt.Color(25, 94, 6)));
         btnUpdate.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUpdate.setOpaque(true);
@@ -242,20 +242,21 @@ public class Order extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(btnHapusBahan, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addComponent(txtNamaResep)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(cmbBahan, 0, 221, Short.MAX_VALUE))
+                        .addComponent(cmbBahan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTambahBahan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnSimpan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnTambahBahan, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2)
+                    .addComponent(btnSimpan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(txtNamaResep, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(0, 107, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnHapusBahan, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -268,18 +269,16 @@ public class Order extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHapusBahan)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbBahan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTambahBahan))
-                .addGap(18, 18, 18)
-                .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(btnHapusBahan)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -287,7 +286,7 @@ public class Order extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("INPUT / EDIT RESEP");
+        jLabel3.setText("ADD / EDIT RESEP");
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icons8_Go_Back_36px.png"))); // NOI18N
         btnBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -366,7 +365,7 @@ public class Order extends javax.swing.JFrame {
 
     public void tampildata() {
         //        membuat header table
-        Object header[] = {"id", "Nama Resep", "Urutan Bahan"};
+        Object header[] = {"id", "Recipe Name", "Ingredients"};
         DefaultTableModel data = new DefaultTableModel(null, header);
         tableData.setModel(data);
 
@@ -515,7 +514,7 @@ public class Order extends javax.swing.JFrame {
     private void btnUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateMouseClicked
         String namaResepBaru = txtNamaResep.getText();
         String susunanBahanBaru = taSusunanBahan.getText();
-        
+
         if (idResepTerpilih.equals("")) {
             JOptionPane.showMessageDialog(null, "Silakan pilih data dari tabel terlebih dahulu!");
             return;
@@ -526,25 +525,65 @@ public class Order extends javax.swing.JFrame {
             return;
         }
 
-        String queryUpdate = "UPDATE resep_burger SET nama_resep = '" + namaResepBaru + 
-                             "', urutan_bahan = '" + susunanBahanBaru + 
-                             "' WHERE id = '" + idResepTerpilih + "'";
+        String queryUpdate = "UPDATE resep_burger SET nama_resep = '" + namaResepBaru
+                + "', urutan_bahan = '" + susunanBahanBaru
+                + "' WHERE id = '" + idResepTerpilih + "'";
 
         try {
             Statement st = kon.con.createStatement();
             st.executeUpdate(queryUpdate);
             JOptionPane.showMessageDialog(null, "Data resep berhasil diperbarui!");
-            
+
             tampildata();
 
             txtNamaResep.setText("");
             taSusunanBahan.setText("");
-            idResepTerpilih = ""; 
+            idResepTerpilih = "";
 
         } catch (Exception e) {
             System.out.println("Error saat update: " + e.getMessage());
         }
     }//GEN-LAST:event_btnUpdateMouseClicked
+
+    private void btnHapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHapusMouseClicked
+        if (idResepTerpilih.equals("")) {
+            JOptionPane.showMessageDialog(null, "Silakan pilih data dari tabel yang ingin dihapus terlebih dahulu!");
+            return;
+        }
+
+        // munculkan dialog konfirmasi sebelum menghapus
+        int konfirmasi = JOptionPane.showConfirmDialog(null,
+            "Apakah Anda yakin ingin menghapus resep ini?",
+            "Konfirmasi Hapus",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE);
+
+        // mengecek pilihan user
+        if (konfirmasi == JOptionPane.YES_OPTION) {
+
+            String queryHapus = "DELETE FROM resep_burger WHERE id = '" + idResepTerpilih + "'";
+
+            try {
+                Statement st = kon.con.createStatement();
+                st.executeUpdate(queryHapus);
+
+                JOptionPane.showMessageDialog(null, "Data resep berhasil dihapus!");
+
+                tampildata();
+
+                txtNamaResep.setText("");
+                taSusunanBahan.setText("");
+                idResepTerpilih = "";
+
+                if (cmbBahan.getItemCount() > 0) {
+                    cmbBahan.setSelectedIndex(0);
+                }
+
+            } catch (Exception e) {
+                System.out.println("Error saat menghapus data: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnHapusMouseClicked
 
     /**
      * @param args the command line arguments
@@ -594,7 +633,6 @@ public class Order extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
