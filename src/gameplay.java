@@ -14,14 +14,15 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import java.awt.Image;
+
 /**
  *
  * @author msi
  */
-public class gameplay extends javax.swing.JFrame implements ActionListener{
-    
+public class gameplay extends javax.swing.JFrame implements ActionListener {
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(gameplay.class.getName());
-    
+
     ArrayList<String> order = new ArrayList<>();
     ArrayList<String> burger = new ArrayList<>();
 
@@ -44,243 +45,242 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     Image lettuceImg;
 
     public gameplay() {
-    initComponents();
-    //setSize(800, 600);
-    setLocationRelativeTo(null);
+        initComponents();
+        //setSize(800, 600);
+        setLocationRelativeTo(null);
 
-    //image
-    breadImg = new ImageIcon(
-        getClass().getResource("/asset/bun.png")
-    ).getImage();
+        //image
+        breadImg = new ImageIcon(
+                getClass().getResource("/asset/bun.png")
+        ).getImage();
 
-    pattyImg = new ImageIcon(
-            getClass().getResource("/asset/beef.png")
-    ).getImage();
+        pattyImg = new ImageIcon(
+                getClass().getResource("/asset/beef.png")
+        ).getImage();
 
-    cheeseImg = new ImageIcon(
-            getClass().getResource("/asset/cheese.png")
-    ).getImage();
+        cheeseImg = new ImageIcon(
+                getClass().getResource("/asset/cheese.png")
+        ).getImage();
 
-    lettuceImg = new ImageIcon(
-            getClass().getResource("/asset/lettuce.png")
-    ).getImage();
+        lettuceImg = new ImageIcon(
+                getClass().getResource("/asset/lettuce.png")
+        ).getImage();
 
-    setResizable(false);
+        setResizable(false);
 
-    breadButton.addActionListener(this);
-    lettuceButton.addActionListener(this);
-    pattyButton.addActionListener(this);
-    cheeseButton.addActionListener(this);
-    serveaButton.addActionListener(this);
+        breadButton.addActionListener(this);
+        lettuceButton.addActionListener(this);
+        pattyButton.addActionListener(this);
+        cheeseButton.addActionListener(this);
+        serveaButton.addActionListener(this);
 
-    cheeseButton.setText("Cheese");
+        cheeseButton.setText("Cheese");
 
-    timeBar.setMaximum(100);
-    timeBar.setValue(100);
+        timeBar.setMaximum(100);
+        timeBar.setValue(100);
 
-    scoreField.setText("0");
-    jTextPane1.setText("0");
-
-    generateOrder();
-
-    startTimer();
-}
-
-void startTimer() {
-
-    gameTimer = new Timer(100, new ActionListener() {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            time--;
-
-            timeBar.setValue(time);
-
-            if (time <= 0) {
-
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Time Up!\nGame Over"
-                );
-
-                System.exit(0);
-            }
-        }
-    });
-
-    gameTimer.start();
-}
-
-    void generateOrder() {
-
-    order.clear();
-    burger.clear();
-
-    menuList.removeAll();
-
-    String[] ingredients = {
-        "Bread",
-        "Patty",
-        "Cheese",
-        "Lettuce"
-    };
-
-    int total = random.nextInt(3) + 3;
-
-    for (int i = 0; i < total; i++) {
-
-        String item =
-                ingredients[random.nextInt(
-                        ingredients.length)];
-
-        order.add(item);
-
-        menuList.add(item);
-    }
-
-    repaint();
-}
-
-void addIngredient(String ingredient) {
-
-    burger.add(ingredient);
-
-    repaint();
-}
-
-void serveBurger() {
-
-    if (burger.equals(order)) {
-
-        score += 10;
-
-        coin += 5;
-
-        scoreField.setText(String.valueOf(score));
-
-        jTextPane1.setText(String.valueOf(coin));
-
-        
-
-        time = 100;
-
-        if (time > 100) {
-            time = 100;
-        }
-
-        timeBar.setValue(time);
+        scoreField.setText("0");
+        jTextPane1.setText("0");
 
         generateOrder();
 
-    } else {
-
-        JOptionPane.showMessageDialog(
-                this,
-                "Wrong Burger!\nGame Over"
-        );
-
-        System.exit(0);
-    }
-}
-
-@Override
-public void actionPerformed(ActionEvent e) {
-
-    if (e.getSource() == breadButton) {
-        addIngredient("Bread");
+        startTimer();
     }
 
-    if (e.getSource() == pattyButton) {
-        addIngredient("Patty");
+    void startTimer() {
+
+        gameTimer = new Timer(100, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                time--;
+
+                timeBar.setValue(time);
+
+                if (time <= 0) {
+
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Time Up!\nGame Over"
+                    );
+
+                    System.exit(0);
+                }
+            }
+        });
+
+        gameTimer.start();
     }
 
-    if (e.getSource() == cheeseButton) {
-        addIngredient("Cheese");
+    void generateOrder() {
+
+        order.clear();
+        burger.clear();
+
+        menuList.removeAll();
+
+        String[] ingredients = {
+            "Bread",
+            "Patty",
+            "Cheese",
+            "Lettuce"
+        };
+
+        int total = random.nextInt(3) + 3;
+
+        for (int i = 0; i < total; i++) {
+
+            String item
+                    = ingredients[random.nextInt(
+                            ingredients.length)];
+
+            order.add(item);
+
+            menuList.add(item);
+        }
+
+        repaint();
     }
 
-    if (e.getSource() == lettuceButton) {
-        addIngredient("Lettuce");
+    void addIngredient(String ingredient) {
+
+        burger.add(ingredient);
+
+        repaint();
     }
 
-    if (e.getSource() == serveaButton) {
-        serveBurger();
-    }
-}
+    void serveBurger() {
 
-@Override
-public void paint(Graphics g) {
+        if (burger.equals(order)) {
 
-    super.paint(g);
+            score += 10;
 
-    int x = 180;
-    int y = 300;
+            coin += 5;
 
-   for (int i = 0; i < burger.size(); i++) {
+            scoreField.setText(String.valueOf(score));
 
-    String ingredient = burger.get(i);
+            jTextPane1.setText(String.valueOf(coin));
 
-    Image currentImage = null;
+            time = 100;
 
-    int height = 0;
+            if (time > 100) {
+                time = 100;
+            }
 
-    int offsetY = 0;
+            timeBar.setValue(time);
 
-    switch (ingredient) {
+            generateOrder();
 
-        case "Bread":
+        } else {
 
-            currentImage = breadImg;
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Wrong Burger!\nGame Over"
+            );
 
-            height = 32;
-
-            break;
-
-        case "Patty":
-
-            currentImage = pattyImg;
-
-            height = 26;
-
-            break;
-
-        case "Cheese":
-
-            currentImage = cheeseImg;
-
-            height = 12;
-
-            offsetY = 5;
-
-            break;
-
-        case "Lettuce":
-
-            currentImage = lettuceImg;
-
-            height = 10;
-
-            offsetY = 8;
-
-            break;
+            System.exit(0);
+        }
     }
 
-    if (currentImage != null) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
-        y -= height;
+        if (e.getSource() == breadButton) {
+            addIngredient("Bread");
+        }
 
-        g.drawImage(
-                currentImage,
-                x,
-                y + offsetY,
-                this
-        );
+        if (e.getSource() == pattyButton) {
+            addIngredient("Patty");
+        }
 
-        // ingredient berikutnya ikut turun
-        y += offsetY;
+        if (e.getSource() == cheeseButton) {
+            addIngredient("Cheese");
+        }
+
+        if (e.getSource() == lettuceButton) {
+            addIngredient("Lettuce");
+        }
+
+        if (e.getSource() == serveaButton) {
+            serveBurger();
+        }
     }
-}
-}
+
+    @Override
+    public void paint(Graphics g) {
+
+        super.paint(g);
+
+        int x = 180;
+        int y = 300;
+
+        for (int i = 0; i < burger.size(); i++) {
+
+            String ingredient = burger.get(i);
+
+            Image currentImage = null;
+
+            int height = 0;
+
+            int offsetY = 0;
+
+            switch (ingredient) {
+
+                case "Bread":
+
+                    currentImage = breadImg;
+
+                    height = 32;
+
+                    break;
+
+                case "Patty":
+
+                    currentImage = pattyImg;
+
+                    height = 26;
+
+                    break;
+
+                case "Cheese":
+
+                    currentImage = cheeseImg;
+
+                    height = 12;
+
+                    offsetY = 5;
+
+                    break;
+
+                case "Lettuce":
+
+                    currentImage = lettuceImg;
+
+                    height = 10;
+
+                    offsetY = 8;
+
+                    break;
+            }
+
+            if (currentImage != null) {
+
+                y -= height;
+
+                g.drawImage(
+                        currentImage,
+                        x,
+                        y + offsetY,
+                        this
+                );
+
+                // ingredient berikutnya ikut turun
+                y += offsetY;
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
