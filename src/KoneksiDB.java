@@ -22,8 +22,8 @@ public class KoneksiDB {
         String id, pass, url, driver;
         id = "root";
         pass = "";
-        url = "jdbc:mysql://localhost:3306/db_burger?userTimezone=true&server=UTC";
-        driver = "com.mysql.jdbc.Driver";
+        url = "jdbc:mysql://localhost:3306/burgergame?userTimezone=true&server=UTC";
+        driver = "com.mysql.cj.jdbc.Driver";
 
         try {
             Class.forName(driver).newInstance();
@@ -44,4 +44,9 @@ public class KoneksiDB {
 //        Connection C = (Connection)KoneksiDB.configDB();
         KoneksiDB kon = new KoneksiDB();
     }
+    
+    public Connection getConnection() {
+        return con;
+    }
+
 }

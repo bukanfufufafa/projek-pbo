@@ -14,6 +14,9 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import java.awt.Image;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 /**
  *
  * @author msi
@@ -21,7 +24,7 @@ import java.awt.Image;
 public class gameplay extends javax.swing.JFrame implements ActionListener{
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(gameplay.class.getName());
-    
+    KoneksiDB db = new KoneksiDB();
     ArrayList<String> order = new ArrayList<>();
     ArrayList<String> burger = new ArrayList<>();
 
@@ -171,31 +174,40 @@ void startTimer() {
 
     menuList.removeAll();
 
-    String[] ingredients = {
-        "Bread",
-        "Patty",
-        "Cheese",
-        "Lettuce",
-        "Salmon",
-        "Egg",
-        "Onion",
-        "Tomato"
-    };
+    try {
 
-    int total = random.nextInt(3) + 3;
+        String sql =
+        "SELECT * FROM resep_burger ORDER BY RAND() LIMIT 1";
 
-    for (int i = 0; i < total; i++) {
+        PreparedStatement ps =
+        db.getConnection().prepareStatement(sql);
 
-        String item =
-                ingredients[random.nextInt(
-                        ingredients.length)];
+        ResultSet rs = ps.executeQuery();
 
-        order.add(item);
+        if(rs.next()){
 
-        menuList.add(item);
-    }
+            String urutan =
+            rs.getString("urutan_bahan");
 
-    repaint();
+            String[] bahan =
+            urutan.split(",");
+
+            for(String b : bahan){
+
+                b = b.trim();
+
+                order.add(b);
+
+                menuList.add(b);
+            }
+        }
+
+        } catch(Exception e){
+
+            e.printStackTrace();
+        }
+
+        repaint();
 }
 
 void addIngredient(String ingredient) {
@@ -209,7 +221,7 @@ void serveBurger() {
 
     if (burger.equals(order)) {
 
-        score += 10;
+        score += time;
 
         coin += 5;
 
@@ -217,13 +229,26 @@ void serveBurger() {
 
         jTextPane1.setText(String.valueOf(coin));
 
-        
+        if (time > 90) {
+            compalinText.setText("Perfect!");
+        }
+        else if (time > 70) {
+            compalinText.setText("Great!");
+        }
+        else if (time > 40) {
+            compalinText.setText("Good");
+        }
+        else {
+            compalinText.setText("Too Slow!");
+        }
 
         time = 100;
 
         if (time > 100) {
             time = 100;
         }
+        
+        
 
         timeBar.setValue(time);
 
@@ -409,31 +434,46 @@ public void paint(Graphics g) {
         trashButton = new javax.swing.JButton();
         eggButton = new javax.swing.JButton();
         salmonButton = new javax.swing.JButton();
+        compalinText = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuOption = new javax.swing.JMenu();
+        pauseItem = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        mainMenuOption = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(39, 18, 10));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        breadButton.setText("Bread");
+        breadButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icon/bread-icon.png"))); // NOI18N
+        breadButton.setBorderPainted(false);
+        breadButton.setContentAreaFilled(false);
         breadButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 breadButtonMouseClicked(evt);
             }
         });
+        getContentPane().add(breadButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
-        lettuceButton.setText("Lettuce");
+        lettuceButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icon/lettuce-icon.png"))); // NOI18N
+        lettuceButton.setBorderPainted(false);
+        lettuceButton.setContentAreaFilled(false);
+        getContentPane().add(lettuceButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 326, -1, -1));
 
-        pattyButton.setText("Patty");
+        pattyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icon/beef-icon.png"))); // NOI18N
+        pattyButton.setBorderPainted(false);
+        pattyButton.setContentAreaFilled(false);
         pattyButton.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 pattyButtonMouseMoved(evt);
             }
         });
         pattyButton.addActionListener(this::pattyButtonActionPerformed);
+        getContentPane().add(pattyButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 250, -1, -1));
 
-        cheeseButton.setText("Cheese");
+        cheeseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icon/cheese-icon.png"))); // NOI18N
+        cheeseButton.setBorderPainted(false);
+        cheeseButton.setContentAreaFilled(false);
         cheeseButton.addHierarchyListener(this::cheeseButtonHierarchyChanged);
         cheeseButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -441,23 +481,39 @@ public void paint(Graphics g) {
             }
         });
         cheeseButton.addActionListener(this::cheeseButtonActionPerformed);
+        getContentPane().add(cheeseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 326, -1, -1));
 
         serveaButton.setText("Serve");
+        getContentPane().add(serveaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(391, 326, -1, -1));
 
         menuText.setText("Order");
+        getContentPane().add(menuText, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 10, 72, -1));
+        getContentPane().add(timeBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 10, 198, 12));
 
         scoreText.setText("Score");
+        getContentPane().add(scoreText, new org.netbeans.lib.awtextra.AbsoluteConstraints(419, 10, 71, -1));
+        getContentPane().add(scoreField, new org.netbeans.lib.awtextra.AbsoluteConstraints(419, 32, 96, -1));
 
         conText.setText("Coin");
+        getContentPane().add(conText, new org.netbeans.lib.awtextra.AbsoluteConstraints(419, 66, 37, -1));
 
         menuList.setName("fddvvdvd"); // NOI18N
         menuList.addActionListener(this::menuListActionPerformed);
+        getContentPane().add(menuList, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 36, 78, 118));
 
         jScrollPane1.setViewportView(jTextPane1);
 
-        onionButton.setText("Onion");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(419, 88, 96, -1));
 
-        tomatoButton.setText("tomato");
+        onionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icon/onion-icon.png"))); // NOI18N
+        onionButton.setBorderPainted(false);
+        onionButton.setContentAreaFilled(false);
+        getContentPane().add(onionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, -1, -1));
+
+        tomatoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icon/tomato-icon.png"))); // NOI18N
+        tomatoButton.setBorderPainted(false);
+        tomatoButton.setContentAreaFilled(false);
+        getContentPane().add(tomatoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 326, -1, -1));
 
         trashButton.setText("Trash");
         trashButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -466,113 +522,40 @@ public void paint(Graphics g) {
             }
         });
         trashButton.addActionListener(this::trashButtonActionPerformed);
+        getContentPane().add(trashButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(391, 285, -1, -1));
 
-        eggButton.setText("Egg");
+        eggButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icon/egg-icon.png"))); // NOI18N
+        eggButton.setBorderPainted(false);
+        eggButton.setContentAreaFilled(false);
+        getContentPane().add(eggButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, -1, -1));
 
-        salmonButton.setText("Salmon");
+        salmonButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icon/salmon-icon.png"))); // NOI18N
+        salmonButton.setBorderPainted(false);
+        salmonButton.setContentAreaFilled(false);
         salmonButton.addActionListener(this::salmonButtonActionPerformed);
+        getContentPane().add(salmonButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 326, -1, -1));
 
-        jMenu1.setText("Menu");
+        compalinText.setBackground(new java.awt.Color(251, 227, 189));
+        compalinText.setFont(new java.awt.Font("Eras Bold ITC", 1, 18)); // NOI18N
+        compalinText.setForeground(new java.awt.Color(255, 255, 255));
+        compalinText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        compalinText.setText("tes");
+        getContentPane().add(compalinText, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 30, 190, -1));
 
-        jMenuItem1.setText("Main Menu");
-        jMenu1.add(jMenuItem1);
+        menuOption.setText("Menu");
 
-        jMenuBar1.add(jMenu1);
+        pauseItem.setText("Pause");
+        menuOption.add(pauseItem);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        jMenuItem2.setText("Restart");
+        menuOption.add(jMenuItem2);
+
+        mainMenuOption.setText("jMenuItem1");
+        menuOption.add(mainMenuOption);
+
+        jMenuBar1.add(menuOption);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(breadButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lettuceButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(menuList, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(menuText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cheeseButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(tomatoButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(salmonButton))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(pattyButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(onionButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(eggButton)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(conText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(scoreField, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane1))
-                                .addGap(17, 17, 17))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(trashButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(serveaButton, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(33, 33, 33))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(timeBar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                        .addComponent(scoreText, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(timeBar, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(menuText))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(menuList, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(breadButton)
-                            .addComponent(pattyButton)
-                            .addComponent(onionButton)
-                            .addComponent(trashButton)
-                            .addComponent(eggButton))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lettuceButton)
-                            .addComponent(cheeseButton)
-                            .addComponent(tomatoButton)
-                            .addComponent(serveaButton)
-                            .addComponent(salmonButton))
-                        .addGap(41, 41, 41))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(scoreText)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scoreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(conText)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -647,20 +630,22 @@ public void paint(Graphics g) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton breadButton;
     private javax.swing.JButton cheeseButton;
+    private javax.swing.JLabel compalinText;
     private javax.swing.JLabel conText;
     private javax.swing.JButton eggButton;
     private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JButton lettuceButton;
+    private javax.swing.JMenuItem mainMenuOption;
     private java.awt.List menuList;
+    private javax.swing.JMenu menuOption;
     private javax.swing.JLabel menuText;
     private javax.swing.JButton onionButton;
     private javax.swing.JButton pattyButton;
+    private javax.swing.JMenuItem pauseItem;
     private javax.swing.JButton salmonButton;
     private javax.swing.JTextField scoreField;
     private javax.swing.JLabel scoreText;
