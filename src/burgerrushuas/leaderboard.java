@@ -30,9 +30,11 @@ public class leaderboard extends javax.swing.JFrame {
     public leaderboard() {
         initComponents();
         
+        setLocationRelativeTo(null);
+
         // Koneksi database
         kon = new Koneksi();
-
+        
         aturHeaderTable();
     
         // Menampilkan data dari database
@@ -42,6 +44,8 @@ public class leaderboard extends javax.swing.JFrame {
     
     public leaderboard(String usernameLogin) {
         initComponents();
+        
+        setLocationRelativeTo(null);
 
         kon = new Koneksi();
 
@@ -53,13 +57,13 @@ public class leaderboard extends javax.swing.JFrame {
         tampilkanPosisiUser();
     }
     
-     private void aturHeaderTable() {
+    private void aturHeaderTable() {
         
         // Header table
         DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
 
         headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        headerRenderer.setBackground(new java.awt.Color(91, 51, 24));
+        headerRenderer.setBackground(new java.awt.Color(107, 45, 15));
         headerRenderer.setForeground(java.awt.Color.WHITE);
         headerRenderer.setFont(new java.awt.Font("Pixelify Sans", java.awt.Font.BOLD, 18));
         headerRenderer.setOpaque(true);
@@ -240,10 +244,12 @@ public class leaderboard extends javax.swing.JFrame {
         btnResetData = new javax.swing.JButton();
         btnStatistikGame = new javax.swing.JButton();
         lblMainMenu = new javax.swing.JButton();
+        lblBurger = new javax.swing.JLabel();
+        lblBurger1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelUtama.setBackground(new java.awt.Color(74, 44, 24));
+        panelUtama.setBackground(new java.awt.Color(107, 45, 15));
 
         lblJudul.setFont(new java.awt.Font("Pixelify Sans", 1, 32)); // NOI18N
         lblJudul.setForeground(new java.awt.Color(255, 255, 255));
@@ -257,7 +263,7 @@ public class leaderboard extends javax.swing.JFrame {
         lblLoggedIn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblLoggedIn.setText("Logged in as:");
 
-        lblUsernameLogin.setFont(new java.awt.Font("Pixelify Sans", 1, 28)); // NOI18N
+        lblUsernameLogin.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         lblUsernameLogin.setForeground(new java.awt.Color(43, 27, 18));
         lblUsernameLogin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblUsernameLogin.setText("Asya");
@@ -292,18 +298,15 @@ public class leaderboard extends javax.swing.JFrame {
                 .addGroup(panelInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLoggedIn)
                     .addComponent(lblUsernameLogin))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
                 .addComponent(separatorInfoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(45, 45, 45)
                 .addComponent(lblTrophyIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addGroup(panelInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelInfoUserLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(lblCurrentScoreText))
-                    .addGroup(panelInfoUserLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(lblCurrentScore)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblCurrentScoreText)
+                    .addComponent(lblCurrentScore))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         panelInfoUserLayout.setVerticalGroup(
             panelInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,10 +316,6 @@ public class leaderboard extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(panelInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelInfoUserLayout.createSequentialGroup()
-                                .addComponent(lblCurrentScoreText, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblCurrentScore, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelInfoUserLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addGroup(panelInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblAvatarIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -325,9 +324,15 @@ public class leaderboard extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(lblUsernameLogin))))
                             .addComponent(separatorInfoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(panelInfoUserLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(lblTrophyIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelInfoUserLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(lblCurrentScoreText, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCurrentScore, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelInfoUserLayout.createSequentialGroup()
+                            .addGap(16, 16, 16)
+                            .addComponent(lblTrophyIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -356,7 +361,7 @@ public class leaderboard extends javax.swing.JFrame {
         panelLeaderboard.setBackground(new java.awt.Color(232, 188, 116));
         panelLeaderboard.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 247, 220), 2, true));
 
-        lblTop10Header.setBackground(new java.awt.Color(230, 100, 28));
+        lblTop10Header.setBackground(new java.awt.Color(253, 140, 0));
         lblTop10Header.setFont(new java.awt.Font("Pixelify Sans", 1, 18)); // NOI18N
         lblTop10Header.setForeground(new java.awt.Color(255, 255, 255));
         lblTop10Header.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -367,7 +372,7 @@ public class leaderboard extends javax.swing.JFrame {
         scrollLeaderboard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         tblLeaderboard.setBackground(new java.awt.Color(248, 220, 163));
-        tblLeaderboard.setFont(new java.awt.Font("Pixelify Sans", 0, 14)); // NOI18N
+        tblLeaderboard.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         tblLeaderboard.setForeground(new java.awt.Color(43, 27, 18));
         tblLeaderboard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -393,8 +398,6 @@ public class leaderboard extends javax.swing.JFrame {
         tblLeaderboard.setSelectionBackground(new java.awt.Color(240, 210, 154));
         tblLeaderboard.setSelectionForeground(new java.awt.Color(43, 27, 18));
         tblLeaderboard.setShowGrid(true);
-        tblLeaderboard.setShowHorizontalLines(true);
-        tblLeaderboard.setShowVerticalLines(true);
         scrollLeaderboard.setViewportView(tblLeaderboard);
 
         javax.swing.GroupLayout panelLeaderboardLayout = new javax.swing.GroupLayout(panelLeaderboard);
@@ -402,13 +405,14 @@ public class leaderboard extends javax.swing.JFrame {
         panelLeaderboardLayout.setHorizontalGroup(
             panelLeaderboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLeaderboardLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(lblTop10Header, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLeaderboardLayout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addComponent(scrollLeaderboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(panelLeaderboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLeaderboardLayout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(lblTop10Header, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelLeaderboardLayout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(scrollLeaderboard, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         panelLeaderboardLayout.setVerticalGroup(
             panelLeaderboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,7 +448,7 @@ public class leaderboard extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("USERNAME");
 
-        lblUsernameUser.setFont(new java.awt.Font("Pixelify Sans", 1, 24)); // NOI18N
+        lblUsernameUser.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         lblUsernameUser.setForeground(new java.awt.Color(43, 27, 18));
         lblUsernameUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUsernameUser.setText("ASYA");
@@ -470,22 +474,6 @@ public class leaderboard extends javax.swing.JFrame {
         panelPosisiKamuLayout.setHorizontalGroup(
             panelPosisiKamuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPosisiKamuLayout.createSequentialGroup()
-                .addGroup(panelPosisiKamuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelPosisiKamuLayout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(lblRankText))
-                    .addGroup(panelPosisiKamuLayout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addGroup(panelPosisiKamuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelPosisiKamuLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(lblUsernameUser))
-                            .addComponent(jLabel1)))
-                    .addGroup(panelPosisiKamuLayout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(lblHighscoreText)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(panelPosisiKamuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelPosisiKamuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPosisiKamuLayout.createSequentialGroup()
@@ -493,18 +481,37 @@ public class leaderboard extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPosisiKamuLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(panelPosisiKamuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblPosisiHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPosisiKamuLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblHighscoreUser, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPosisiKamuLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblPosisiHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))))
             .addGroup(panelPosisiKamuLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(lblRankUser)
+                .addGroup(panelPosisiKamuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPosisiKamuLayout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(lblRankText))
+                    .addGroup(panelPosisiKamuLayout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(lblRankUser)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelPosisiKamuLayout.createSequentialGroup()
+                .addGroup(panelPosisiKamuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPosisiKamuLayout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addGroup(panelPosisiKamuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelPosisiKamuLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblUsernameUser))
+                            .addComponent(jLabel1)))
+                    .addGroup(panelPosisiKamuLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(lblHighscoreText))
+                    .addGroup(panelPosisiKamuLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lblHighscoreUser, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelPosisiKamuLayout.setVerticalGroup(
             panelPosisiKamuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,9 +532,9 @@ public class leaderboard extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHighscoreText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHighscoreUser)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnResetData.setBackground(new java.awt.Color(214, 58, 44));
@@ -542,7 +549,7 @@ public class leaderboard extends javax.swing.JFrame {
             }
         });
 
-        btnStatistikGame.setBackground(new java.awt.Color(59, 130, 246));
+        btnStatistikGame.setBackground(new java.awt.Color(253, 140, 0));
         btnStatistikGame.setFont(new java.awt.Font("Pixelify Sans", 1, 16)); // NOI18N
         btnStatistikGame.setForeground(new java.awt.Color(255, 255, 255));
         btnStatistikGame.setText("STATISTIK GAME");
@@ -555,15 +562,20 @@ public class leaderboard extends javax.swing.JFrame {
         });
         btnStatistikGame.addActionListener(this::btnStatistikGameActionPerformed);
 
-        lblMainMenu.setBackground(new java.awt.Color(242, 201, 76));
+        lblMainMenu.setBackground(new java.awt.Color(56, 141, 16));
         lblMainMenu.setFont(new java.awt.Font("Pixelify Sans", 1, 20)); // NOI18N
         lblMainMenu.setForeground(new java.awt.Color(43, 27, 18));
         lblMainMenu.setText("Main Menu");
+        lblMainMenu.setBorder(null);
         lblMainMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblMainMenuMouseClicked(evt);
             }
         });
+
+        lblBurger.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/burger.png"))); // NOI18N
+
+        lblBurger1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/burger.png"))); // NOI18N
 
         javax.swing.GroupLayout panelUtamaLayout = new javax.swing.GroupLayout(panelUtama);
         panelUtama.setLayout(panelUtamaLayout);
@@ -572,34 +584,43 @@ public class leaderboard extends javax.swing.JFrame {
             .addGroup(panelUtamaLayout.createSequentialGroup()
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelUtamaLayout.createSequentialGroup()
-                        .addGap(301, 301, 301)
-                        .addComponent(lblJudul))
-                    .addGroup(panelUtamaLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelUtamaLayout.createSequentialGroup()
-                                .addComponent(btnResetData)
-                                .addGap(202, 202, 202)
-                                .addComponent(btnStatistikGame)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblMainMenu))
-                            .addComponent(panelInfoUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(31, 31, 31)
+                        .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelUtamaLayout.createSequentialGroup()
                                 .addComponent(panelLeaderboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(panelPosisiKamu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(panelPosisiKamu, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panelInfoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelUtamaLayout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelUtamaLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(162, 162, 162)
+                        .addComponent(lblBurger1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addComponent(lblJudul)
+                        .addGap(27, 27, 27)
+                        .addComponent(lblBurger, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(panelUtamaLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(btnResetData)
+                .addGap(87, 87, 87)
+                .addComponent(btnStatistikGame)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblMainMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
         );
         panelUtamaLayout.setVerticalGroup(
             panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelUtamaLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(lblJudul)
+                .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblJudul)
+                        .addComponent(lblBurger, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblBurger1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(panelInfoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -610,7 +631,7 @@ public class leaderboard extends javax.swing.JFrame {
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnStatistikGame, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnResetData, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMainMenu))
+                    .addComponent(lblMainMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1298, 1298, 1298)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -722,6 +743,8 @@ public class leaderboard extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblAvatarIcon;
+    private javax.swing.JLabel lblBurger;
+    private javax.swing.JLabel lblBurger1;
     private javax.swing.JLabel lblCurrentScore;
     private javax.swing.JLabel lblCurrentScoreText;
     private javax.swing.JLabel lblHighscoreText;

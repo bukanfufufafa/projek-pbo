@@ -26,6 +26,8 @@ public class statistikGame extends javax.swing.JFrame {
     public statistikGame() {
         initComponents();
         
+        setLocationRelativeTo(null);
+        
         kon = new Koneksi();
 
         usernameLogin = "Asya";
@@ -39,6 +41,8 @@ public class statistikGame extends javax.swing.JFrame {
     
     public statistikGame(String usernameLogin, int currentScore) {
         initComponents();
+        
+        setLocationRelativeTo(null);
 
         kon = new Koneksi();
 
@@ -121,10 +125,12 @@ public class statistikGame extends javax.swing.JFrame {
         lblTotalBermainValue = new javax.swing.JLabel();
         btnLeaderboard = new javax.swing.JButton();
         lblMainMenu = new javax.swing.JButton();
+        lblBurger1 = new javax.swing.JLabel();
+        lblBurger2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(74, 44, 24));
+        jPanel1.setBackground(new java.awt.Color(107, 45, 15));
 
         lblStatistik.setFont(new java.awt.Font("Pixelify Sans", 1, 32)); // NOI18N
         lblStatistik.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,7 +144,7 @@ public class statistikGame extends javax.swing.JFrame {
         lblLoggedIn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblLoggedIn.setText("Logged in as:");
 
-        lblUsernameLogin.setFont(new java.awt.Font("Pixelify Sans", 1, 28)); // NOI18N
+        lblUsernameLogin.setFont(new java.awt.Font("Arial Black", 1, 28)); // NOI18N
         lblUsernameLogin.setForeground(new java.awt.Color(43, 27, 18));
         lblUsernameLogin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblUsernameLogin.setText("Asya");
@@ -173,7 +179,7 @@ public class statistikGame extends javax.swing.JFrame {
                 .addGroup(panelInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLoggedIn)
                     .addComponent(lblUsernameLogin))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(separatorInfoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(lblTrophyIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,7 +189,7 @@ public class statistikGame extends javax.swing.JFrame {
                     .addGroup(panelInfoUserLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(lblCurrentScore)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelInfoUserLayout.setVerticalGroup(
             panelInfoUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,6 +393,10 @@ public class statistikGame extends javax.swing.JFrame {
             }
         });
 
+        lblBurger1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/burger.png"))); // NOI18N
+
+        lblBurger2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/burger.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -394,13 +404,17 @@ public class statistikGame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addComponent(lblStatistik))
+                        .addGap(155, 155, 155)
+                        .addComponent(lblBurger2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblStatistik)
+                        .addGap(27, 27, 27)
+                        .addComponent(lblBurger1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelStatistik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelInfoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(panelStatistik, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelInfoUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(112, 112, 112)
                         .addComponent(btnLeaderboard)
@@ -412,7 +426,10 @@ public class statistikGame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(lblStatistik)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblBurger1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBurger2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblStatistik, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelInfoUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -421,16 +438,14 @@ public class statistikGame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLeaderboard)
                     .addComponent(lblMainMenu))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -489,6 +504,8 @@ public class statistikGame extends javax.swing.JFrame {
     private javax.swing.JButton btnLeaderboard;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAvatarIcon;
+    private javax.swing.JLabel lblBurger1;
+    private javax.swing.JLabel lblBurger2;
     private javax.swing.JLabel lblCurrentScore;
     private javax.swing.JLabel lblCurrentScoreText;
     private javax.swing.JLabel lblHighScore;
