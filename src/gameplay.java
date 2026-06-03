@@ -27,7 +27,7 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     KoneksiDB db = new KoneksiDB();
     ArrayList<String> order = new ArrayList<>();
     ArrayList<String> burger = new ArrayList<>();
-
+    int totalBurgerDibuat = 0;
     Random random = new Random();
 
     int score = 0;
@@ -55,7 +55,8 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     initComponents();
     //setSize(800, 600);
     setLocationRelativeTo(null);
-
+    System.out.println("ID User : " + session.idUser);
+    System.out.println("Username : " + session.username);
     //image
     breadImg = new ImageIcon(
         getClass().getResource("/asset/bun.png")
@@ -113,6 +114,38 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     startTimer();
 }
 
+    
+    
+    private void savePlayerStats() {
+
+    try {
+
+        String sql =
+        "UPDATE player_stats SET " +
+        "jumlah_burger_dibuat = jumlah_burger_dibuat + ?, " +
+        "skor = GREATEST(skor, ?), " +
+        "koin = koin + ? " +
+        "WHERE id_akun = ?";
+
+        PreparedStatement ps =
+        db.getConnection().prepareStatement(sql);
+
+        ps.setInt(1, totalBurgerDibuat);
+        ps.setInt(2, score);
+        ps.setInt(3, coin);
+        ps.setInt(4, session.idUser);
+
+        int rows = ps.executeUpdate();
+
+        System.out.println("Rows affected = " + rows);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+}
+    
+    
 void startTimer() {
 
     gameTimer = new Timer(100, new ActionListener() {
@@ -138,10 +171,12 @@ void startTimer() {
                 if (pilihan == JOptionPane.YES_OPTION) {
 
                     // reset game
+                    savePlayerStats();
+                   
                     score = 0;
                     coin = 0;
                     time = 100;
-
+                    
                     burger.clear();
                     order.clear();
 
@@ -157,7 +192,7 @@ void startTimer() {
                     gameTimer.start();
 
                 } else {
-
+                    savePlayerStats();
                     System.exit(0);
                 }
             }
@@ -221,6 +256,8 @@ void serveBurger() {
 
     if (burger.equals(order)) {
 
+        totalBurgerDibuat++;
+        
         score += time;
 
         coin += 5;
@@ -260,7 +297,7 @@ void serveBurger() {
                 this,
                 "Wrong Burger!\nGame Over"
         );
-
+        savePlayerStats();
         System.exit(0);
     }
 }
@@ -437,9 +474,8 @@ public void paint(Graphics g) {
         compalinText = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuOption = new javax.swing.JMenu();
-        pauseItem = new javax.swing.JMenuItem();
+        mainMenu = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        mainMenuOption = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(39, 18, 10));
@@ -544,14 +580,12 @@ public void paint(Graphics g) {
 
         menuOption.setText("Menu");
 
-        pauseItem.setText("Pause");
-        menuOption.add(pauseItem);
+        mainMenu.setText("Main Menu");
+        mainMenu.addActionListener(this::mainMenuActionPerformed);
+        menuOption.add(mainMenu);
 
         jMenuItem2.setText("Restart");
         menuOption.add(jMenuItem2);
-
-        mainMenuOption.setText("jMenuItem1");
-        menuOption.add(mainMenuOption);
 
         jMenuBar1.add(menuOption);
 
@@ -602,6 +636,10 @@ public void paint(Graphics g) {
         // TODO add your handling code here:
     }//GEN-LAST:event_trashButtonActionPerformed
 
+    private void mainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mainMenuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -639,13 +677,12 @@ public void paint(Graphics g) {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JButton lettuceButton;
-    private javax.swing.JMenuItem mainMenuOption;
+    private javax.swing.JMenuItem mainMenu;
     private java.awt.List menuList;
     private javax.swing.JMenu menuOption;
     private javax.swing.JLabel menuText;
     private javax.swing.JButton onionButton;
     private javax.swing.JButton pattyButton;
-    private javax.swing.JMenuItem pauseItem;
     private javax.swing.JButton salmonButton;
     private javax.swing.JTextField scoreField;
     private javax.swing.JLabel scoreText;

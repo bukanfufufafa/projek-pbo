@@ -82,6 +82,11 @@ public class MainMenu extends javax.swing.JFrame {
         btnLeaderboard.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(54, 20, 2), new java.awt.Color(254, 183, 52), new java.awt.Color(54, 20, 2), new java.awt.Color(218, 102, 16)));
         btnLeaderboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLeaderboard.setOpaque(true);
+        btnLeaderboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLeaderboardMouseClicked(evt);
+            }
+        });
 
         btnExit.setBackground(new java.awt.Color(96, 39, 10));
         btnExit.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -100,6 +105,11 @@ public class MainMenu extends javax.swing.JFrame {
         btnShop.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 52, 33), new java.awt.Color(146, 91, 53), new java.awt.Color(44, 16, 3), new java.awt.Color(60, 25, 5)));
         btnShop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnShop.setOpaque(true);
+        btnShop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnShopMouseClicked(evt);
+            }
+        });
 
         btnResep.setBackground(new java.awt.Color(96, 39, 10));
         btnResep.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -203,6 +213,22 @@ public class MainMenu extends javax.swing.JFrame {
         FrameOrder.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnResepMouseClicked
+
+    private void btnShopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShopMouseClicked
+        // TODO add your handling code here:
+        InventoryShopFrame shop = new InventoryShopFrame();
+        shop.setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_btnShopMouseClicked
+
+    private void btnLeaderboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLeaderboardMouseClicked
+        // TODO add your handling code here:
+        leaderboard leaderboard = new leaderboard();
+        leaderboard.setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_btnLeaderboardMouseClicked
 
     /**
      * @param args the command line arguments

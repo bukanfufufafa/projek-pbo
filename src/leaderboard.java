@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package burgerrushuas;
+
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -17,9 +17,9 @@ import javax.swing.SwingConstants;
  */
 public class leaderboard extends javax.swing.JFrame {
     
-    Koneksi kon;
+    KoneksiDB db = new KoneksiDB();
 
-    private String usernameLogin = "Asya";
+    private String usernameLogin = session.username;
     private int currentScore = 0;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(leaderboard.class.getName());
@@ -28,26 +28,26 @@ public class leaderboard extends javax.swing.JFrame {
      * Creates new form leaderboard
      */
     public leaderboard() {
-        initComponents();
-        
-        setLocationRelativeTo(null);
+    initComponents();
 
-        // Koneksi database
-        kon = new Koneksi();
-        
-        aturHeaderTable();
-    
-        // Menampilkan data dari database
-        tampilkanTop10Leaderboard();
-        tampilkanPosisiUser();
-    }
+    setLocationRelativeTo(null);
+
+    db = new KoneksiDB();
+
+    System.out.println("Koneksi = " + db.con);
+
+    aturHeaderTable();
+
+    tampilkanTop10Leaderboard();
+    tampilkanPosisiUser();
+}
     
     public leaderboard(String usernameLogin) {
         initComponents();
         
         setLocationRelativeTo(null);
 
-        kon = new Koneksi();
+        db = new KoneksiDB();
 
         this.usernameLogin = usernameLogin;
 
@@ -73,10 +73,9 @@ public class leaderboard extends javax.swing.JFrame {
     }
      
     public void simpanHasilGame(String username, int scoreBaru, int totalOrderBaru, int orderSelesaiBaru, int orderGagalBaru) {
-        String cek_data = "SELECT highscore FROM scores WHERE username = '" + username + "'";
-
+       String cek_data = "SELECT highscore FROM scores WHERE id_akun = " + session.idUser;
         try {
-            Statement st = kon.con.createStatement();
+            Statement st = db.con.createStatement();
             ResultSet rs = st.executeQuery(cek_data);
 
             if (rs.next()) {
@@ -89,29 +88,29 @@ public class leaderboard extends javax.swing.JFrame {
                 }
 
                 String update_score = "UPDATE scores SET "
-                        + "highscore = '" + highscoreFinal + "', "
-                        + "current_score = '" + scoreBaru + "', "
-                        + "total_order = total_order + '" + totalOrderBaru + "', "
-                        + "order_selesai = order_selesai + '" + orderSelesaiBaru + "', "
-                        + "order_gagal = order_gagal + '" + orderGagalBaru + "', "
-                        + "total_bermain = total_bermain + 1 "
-                        + "WHERE username = '" + username + "'";
+                    + "highscore = " + highscoreFinal + ", "
+                    + "current_score = " + scoreBaru + ", "
+                    + "total_order = total_order + " + totalOrderBaru + ", "
+                    + "order_selesai = order_selesai + " + orderSelesaiBaru + ", "
+                    + "order_gagal = order_gagal + " + orderGagalBaru + ", "
+                    + "total_bermain = total_bermain + 1 "
+                    + "WHERE id_akun = " + session.idUser;
 
                 st.executeUpdate(update_score);
 
             } else {
                 // CREATE DATA
                 String tambah_score = "INSERT INTO scores "
-                        + "(username, highscore, current_score, total_order, order_selesai, order_gagal, total_bermain) "
-                        + "VALUES "
-                        + "('" + username + "', "
-                        + "'" + scoreBaru + "', "
-                        + "'" + scoreBaru + "', "
-                        + "'" + totalOrderBaru + "', "
-                        + "'" + orderSelesaiBaru + "', "
-                        + "'" + orderGagalBaru + "', "
-                        + "'1')";
-
+                    + "(id_akun, highscore, current_score, total_order, "
+                    + "order_selesai, order_gagal, total_bermain) "
+                    + "VALUES ("
+                    + session.idUser + ", "
+                    + scoreBaru + ", "
+                    + scoreBaru + ", "
+                    + totalOrderBaru + ", "
+                    + orderSelesaiBaru + ", "
+                    + orderGagalBaru + ", "
+                    + "1)";
                 st.executeUpdate(tambah_score);
             }
 
@@ -127,47 +126,85 @@ public class leaderboard extends javax.swing.JFrame {
     }
     
     // menampilkan top 10 leaderboard
-    private void tampilkanTop10Leaderboard() {
-        // membuat header table
-        Object header[] = {"Rank", "Username", "Highscore"};
-        DefaultTableModel data = new DefaultTableModel(null, header);
-        tblLeaderboard.setModel(data);
+   private void tampilkanTop10Leaderboard() {
 
-        // query menampilkan top 10 leaderboard
-        String query_tampil = "SELECT username, highscore FROM scores ORDER BY highscore DESC LIMIT 10";
+    System.out.println("=== LOAD LEADERBOARD ===");
 
-        try {
-            // mengirimkan query
-            Statement st = kon.con.createStatement();
-
-            // menyimpan hasil sementara dari database
-            ResultSet rs = st.executeQuery(query_tampil);
-
-            int rank = 1;
-
-            // memasukkan data ke tabel
-            while (rs.next()) {
-                String kolom1 = String.valueOf(rank);
-                String kolom2 = rs.getString("username");
-                String kolom3 = rs.getString("highscore");
-
-                String kolom[] = {kolom1, kolom2, kolom3};
-                data.addRow(kolom);
-
-                rank++;
-            }
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, "Gagal menampilkan leaderboard!");
-        }
+    if (db == null) {
+        System.out.println("db NULL");
+        return;
     }
+
+    if (db.con == null) {
+        System.out.println("db.con NULL");
+        return;
+    }
+
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("Rank");
+    model.addColumn("Username");
+    model.addColumn("Highscore");
+
+    tblLeaderboard.setModel(model);
+
+    try {
+
+        String sql =
+            "SELECT akun.username, scores.highscore " +
+            "FROM scores " +
+            "INNER JOIN akun ON akun.id = scores.id_akun " +
+            "ORDER BY scores.highscore DESC";
+
+        Statement st = db.con.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+
+        int rank = 1;
+
+        while (rs.next()) {
+
+            String username = rs.getString("username");
+            int highscore = rs.getInt("highscore");
+
+            System.out.println(
+                rank + " | " +
+                username + " | " +
+                highscore
+            );
+
+            model.addRow(new Object[]{
+                rank,
+                username,
+                highscore
+            });
+
+            rank++;
+        }
+
+        System.out.println(
+            "Jumlah baris tabel = " +
+            model.getRowCount()
+        );
+
+        tblLeaderboard.repaint();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(
+            this,
+            e.getMessage()
+        );
+    }
+}
     
     private void tampilkanPosisiUser() {
-        String query_score = "SELECT username, highscore, current_score FROM scores WHERE username = '" + usernameLogin + "'";
+        String query_score =
+            "SELECT akun.username, scores.highscore, scores.current_score " +
+            "FROM scores " +
+            "JOIN akun ON scores.id_akun = akun.id " +
+            "WHERE akun.id = " + session.idUser;
 
         try {
-            Statement st = kon.con.createStatement();
+            Statement st = db.con.createStatement();
             ResultSet rs = st.executeQuery(query_score);
 
             if (rs.next()) {
@@ -177,7 +214,7 @@ public class leaderboard extends javax.swing.JFrame {
 
                 String query_rank = "SELECT COUNT(*) + 1 AS rank_user FROM scores WHERE highscore > " + highscore;
 
-                Statement stRank = kon.con.createStatement();
+                Statement stRank = db.con.createStatement();
                 ResultSet rsRank = stRank.executeQuery(query_rank);
 
                 if (rsRank.next()) {
@@ -481,12 +518,13 @@ public class leaderboard extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPosisiKamuLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPosisiKamuLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblPosisiHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67))))
+                        .addGroup(panelPosisiKamuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPosisiKamuLayout.createSequentialGroup()
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPosisiKamuLayout.createSequentialGroup()
+                                .addComponent(lblPosisiHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(67, 67, 67))))))
             .addGroup(panelPosisiKamuLayout.createSequentialGroup()
                 .addGroup(panelPosisiKamuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPosisiKamuLayout.createSequentialGroup()
@@ -572,6 +610,7 @@ public class leaderboard extends javax.swing.JFrame {
                 lblMainMenuMouseClicked(evt);
             }
         });
+        lblMainMenu.addActionListener(this::lblMainMenuActionPerformed);
 
         lblBurger.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/burger.png"))); // NOI18N
 
@@ -617,7 +656,7 @@ public class leaderboard extends javax.swing.JFrame {
             .addGroup(panelUtamaLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblJudul)
                         .addComponent(lblBurger, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblBurger1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -673,10 +712,9 @@ public class leaderboard extends javax.swing.JFrame {
         );
 
         if (konfirmasi == JOptionPane.YES_OPTION) {
-            String hapus_score = "DELETE FROM scores WHERE username = '" + usernameLogin + "'";
-
+            String hapus_score = "DELETE FROM scores WHERE id_akun = " + session.idUser;
             try {
-                Statement st = kon.con.createStatement();
+                Statement st = db.con.createStatement();
                 st.executeUpdate(hapus_score);
 
                 JOptionPane.showMessageDialog(null, "Data " + usernameLogin + " berhasil direset");
@@ -708,6 +746,14 @@ public class leaderboard extends javax.swing.JFrame {
 //        this.setVisible(false);
 
     }//GEN-LAST:event_lblMainMenuMouseClicked
+
+    private void lblMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblMainMenuActionPerformed
+        // TODO add your handling code here:
+        MainMenu mainmenu = new MainMenu();
+        this.setVisible(false);
+        mainmenu.setVisible(true);
+
+    }//GEN-LAST:event_lblMainMenuActionPerformed
 
     /**
      * @param args the command line arguments
