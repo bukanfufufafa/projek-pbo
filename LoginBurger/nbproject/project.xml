@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.java.j2seproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
+<<<<<<< HEAD
+            <name>LoginBurger</name>
+=======
+            <name>UAS-PBO</name>
+>>>>>>> 0fef20ff87371f998e5c72c991034f853fcdbfec
+            <source-roots>
+                <root id="src.dir"/>
+            </source-roots>
+            <test-roots>
+                <root id="test.src.dir"/>
+            </test-roots>
+        </data>
+<<<<<<< HEAD
+        <libraries xmlns="http://www.netbeans.org/ns/ant-project-libraries/1">
+            <definitions>D:\Users\hfz\Documents\pbo\per13\mysql-connector-j-9.6.0\nblibraries.properties</definitions>
+        </libraries>
+=======
+>>>>>>> 0fef20ff87371f998e5c72c991034f853fcdbfec
+    </configuration>
+</project>
