@@ -449,7 +449,7 @@ public class InventoryShopFrame extends javax.swing.JFrame {
                 new KoneksiDB().getConnection();
 
         String sql =
-                "SELECT * FROM inventory";
+                "SELECT * FROM bahan";
 
         PreparedStatement ps =
                 con.prepareStatement(sql);
@@ -666,7 +666,7 @@ public class InventoryShopFrame extends javax.swing.JFrame {
         harga = 100;
     }
     else if (bahan.equals("Patty")) {
-        harga = 250;
+        harga = 200;
     }
     else if (bahan.equals("Onion")) {
         harga = 50;
@@ -678,13 +678,13 @@ public class InventoryShopFrame extends javax.swing.JFrame {
         harga = 150;
     }
     else if (bahan.equals("Lettuce")) {
-        harga = 80;
+        harga = 50;
     }
     else if (bahan.equals("Tomato")) {
-        harga = 70;
+        harga = 60;
     }
     else if (bahan.equals("Salmon")) {
-        harga = 400;
+        harga = 300;
     }
 
     // stok dikurangi 1

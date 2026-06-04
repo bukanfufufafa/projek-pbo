@@ -120,6 +120,7 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
 
     try {
 
+        // Update statistik total pemain
         String sql =
         "UPDATE player_stats SET " +
         "jumlah_burger_dibuat = jumlah_burger_dibuat + ?, " +
@@ -135,14 +136,32 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
         ps.setInt(3, coin);
         ps.setInt(4, session.idUser);
 
-        int rows = ps.executeUpdate();
+        ps.executeUpdate();
 
-        System.out.println("Rows affected = " + rows);
+        // Simpan riwayat permainan ke tabel scores
+        String insertScore =
+        "INSERT INTO scores " +
+        "(id_akun, highscore, current_score, total_order, order_selesai, order_gagal, total_bermain) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement psScore =
+        db.getConnection().prepareStatement(insertScore);
+
+        psScore.setInt(1, session.idUser);
+        psScore.setInt(2, score);              // highscore sesi ini
+        psScore.setInt(3, score);              // current score
+        psScore.setInt(4, totalBurgerDibuat);  // total order
+        psScore.setInt(5, totalBurgerDibuat);  // order selesai
+        psScore.setInt(6, 0);                  // order gagal
+        psScore.setInt(7, 1);                  // 1 kali bermain
+
+        psScore.executeUpdate();
+
+        System.out.println("Data score berhasil disimpan.");
 
     } catch (Exception e) {
         e.printStackTrace();
     }
-
 }
     
     

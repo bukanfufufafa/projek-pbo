@@ -418,6 +418,7 @@ public class statistikGame extends javax.swing.JFrame {
                 lblMainMenuMouseClicked(evt);
             }
         });
+        lblMainMenu.addActionListener(this::lblMainMenuActionPerformed);
 
         lblBurger1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/burger.png"))); // NOI18N
 
@@ -496,10 +497,14 @@ public class statistikGame extends javax.swing.JFrame {
 
     private void lblMainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMainMenuMouseClicked
         // TODO add your handling code here:
-//        MainMenuFrame form_menu = new MainMenuFrame();
-//        form_menu.setVisible(true);
-//        this.setVisible(false);
+        MainMenu form_menu = new MainMenu();
+        form_menu.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_lblMainMenuMouseClicked
+
+    private void lblMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblMainMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblMainMenuActionPerformed
 
     /**
      * @param args the command line arguments

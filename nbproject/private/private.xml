@@ -9,11 +9,16 @@
         </group>
         <group name="project-pbo">
             <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/gameplay.java</file>
-            <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/MainMenu.java</file>
             <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/Order.java</file>
-            <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/koneksi.java</file>
+            <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/MainMenu.java</file>
+            <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/BurgerRushUAS.java</file>
+            <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/leaderboard.java</file>
+            <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/statistikGame.java</file>
             <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/KoneksiDB.java</file>
-            <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/database/db_burger.sql</file>
+            <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/InventoryShopFrame.java</file>
+            <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/loginburger.java</file>
+            <file>file:/C:/Users/basri/Documents/NetBeansProjects/projek-pbo/src/session.java</file>
         </group>
     </open-files>
 </project-private>
