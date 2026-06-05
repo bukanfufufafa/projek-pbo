@@ -53,6 +53,9 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     //tes
     public gameplay() {
     initComponents();
+    
+    setTitle("BURGER RUSH");
+    setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
     //setSize(800, 600);
     setLocationRelativeTo(null);
     System.out.println("ID User : " + session.idUser);

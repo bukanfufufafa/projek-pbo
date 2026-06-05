@@ -1,3 +1,5 @@
+import javax.swing.ImageIcon;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,6 +17,8 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+        setTitle("MENU");
+        setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
     }
 
     /**

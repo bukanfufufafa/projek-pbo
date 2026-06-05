@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 /**
  *
  * @author hfz
@@ -22,6 +23,8 @@ public class loginburger extends javax.swing.JFrame {
      */
     public loginburger() {
         initComponents();
+        setTitle("LOGIN");
+        setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
         setLocationRelativeTo(null);
         
         txtUsername.setText("Username");

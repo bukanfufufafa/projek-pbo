@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -33,6 +34,9 @@ public class InventoryShopFrame extends javax.swing.JFrame {
      */
     public InventoryShopFrame() {
     initComponents();
+    
+    setTitle("INVENTORY & SHOP");
+    setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
 
     //LBsaldo.setText("Saldo : " + saldo);
     loadSaldo();
@@ -127,6 +131,7 @@ public class InventoryShopFrame extends javax.swing.JFrame {
         TableBahan = new javax.swing.JTable();
         LBsaldo = new javax.swing.JLabel();
         JBhapus = new javax.swing.JButton();
+        lblMainMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(196, 105, 47));
@@ -352,24 +357,38 @@ public class InventoryShopFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lblMainMenu.setBackground(new java.awt.Color(56, 141, 16));
+        lblMainMenu.setFont(new java.awt.Font("Pixelify Sans", 1, 20)); // NOI18N
+        lblMainMenu.setForeground(new java.awt.Color(43, 27, 18));
+        lblMainMenu.setText("Main Menu");
+        lblMainMenu.setBorder(null);
+        lblMainMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMainMenuMouseClicked(evt);
+            }
+        });
+        lblMainMenu.addActionListener(this::lblMainMenuActionPerformed);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblMainMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addGap(173, 173, 173)
+                            .addComponent(jLabel9)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel10))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addGap(15, 15, 15)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -388,7 +407,9 @@ public class InventoryShopFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(lblMainMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -730,6 +751,22 @@ public class InventoryShopFrame extends javax.swing.JFrame {
     "Bahan berhasil dijual!");
     }//GEN-LAST:event_JBhapusActionPerformed
 
+    private void lblMainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMainMenuMouseClicked
+        // TODO add your handling code here:
+
+        //nanti ganti jadi gini
+        //        MainMenuFrame form_menu = new MainMenuFrame();
+        //        form_menu.setVisible(true);
+        //        this.setVisible(false);
+    }//GEN-LAST:event_lblMainMenuMouseClicked
+
+    private void lblMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblMainMenuActionPerformed
+        // TODO add your handling code here:
+        MainMenu mainmenu = new MainMenu();
+        this.setVisible(false);
+        mainmenu.setVisible(true);
+    }//GEN-LAST:event_lblMainMenuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -777,5 +814,6 @@ public class InventoryShopFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton lblMainMenu;
     // End of variables declaration//GEN-END:variables
 }

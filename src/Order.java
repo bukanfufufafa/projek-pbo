@@ -3,7 +3,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.ImageIcon;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -22,6 +22,9 @@ public class Order extends javax.swing.JFrame {
      */
     public Order() {
         initComponents();
+        setTitle("RECIPE BOOK");
+        setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
+        
         kon = new KoneksiDB();
 
         tampildata();
