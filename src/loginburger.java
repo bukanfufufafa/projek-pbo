@@ -23,10 +23,12 @@ public class loginburger extends javax.swing.JFrame {
      */
     public loginburger() {
         initComponents();
+        btnUbahPassword.setVisible(false);
+        btnHapusAkun.setVisible(false);
         setTitle("LOGIN");
         setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
         setLocationRelativeTo(null);
-        
+
         txtUsername.setText("Username");
         txtPassword.setText("Password");
     }
@@ -306,7 +308,18 @@ public class loginburger extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUbahPasswordActionPerformed
 
     private void btnKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKeluarMouseClicked
-        dispose();
+        int konfirmasi = JOptionPane.showConfirmDialog(
+                this,
+                "Anda yakin ingin keluar?",
+                "Konfirmasi Keluar",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (konfirmasi == JOptionPane.YES_OPTION) {
+            dispose();
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnKeluarMouseClicked
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
@@ -325,14 +338,19 @@ public class loginburger extends javax.swing.JFrame {
         try {
             Connection conn = db.getConnection();
 
-            String sql = "SELECT * FROM akun WHERE username = ? AND password = ?";
+            String sql = "SELECT id, username, password FROM akun WHERE username = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, username);
-            pst.setString(2, password);
             
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
+                String passwordDb = rs.getString("password");
+                if (!password.equals(passwordDb)) {
+                    JOptionPane.showMessageDialog(this, "Password salah!");
+                    return;
+                }
+
                  session.idUser = rs.getInt("id");
                  session.username = rs.getString("username");
 
@@ -347,7 +365,7 @@ public class loginburger extends javax.swing.JFrame {
                 // this.dispose();
 
             } else {
-                JOptionPane.showMessageDialog(this, "Username atau password salah!");
+                JOptionPane.showMessageDialog(this, "Username dan password salah!");
             }
             
         } catch (Exception e) {

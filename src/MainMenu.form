@@ -145,6 +145,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="btnPlay" alignment="1" max="32767" attributes="0"/>
                               <Component id="btnLeaderboard" max="32767" attributes="0"/>
+                              <Component id="btnProfile" max="32767" attributes="0"/>
                               <Component id="btnExit" max="32767" attributes="0"/>
                               <Component id="btnShop" pref="329" max="32767" attributes="0"/>
                               <Component id="btnResep" max="32767" attributes="0"/>
@@ -160,6 +161,8 @@
                           <Component id="btnPlay" min="-2" pref="67" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnLeaderboard" min="-2" pref="67" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnProfile" min="-2" pref="67" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnShop" min="-2" pref="67" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -236,6 +239,38 @@
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLeaderboardMouseClicked"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JLabel" name="btnProfile">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="a" green="27" red="60" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI Black" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
+                    <Property name="text" type="java.lang.String" value="PROFILE"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+                        <BevelBorder>
+                          <Color PropertyName="highlightOuter" blue="21" green="34" red="66" type="rgb"/>
+                          <Color PropertyName="highlightInner" blue="35" green="5b" red="92" type="rgb"/>
+                          <Color PropertyName="shadowOuter" blue="3" green="10" red="2c" type="rgb"/>
+                          <Color PropertyName="shadowInner" blue="5" green="19" red="3c" type="rgb"/>
+                        </BevelBorder>
+                      </Border>
+                    </Property>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Hand Cursor"/>
+                    </Property>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnProfileMouseClicked"/>
+                  </Events>
+                </Component>
                 <Component class="javax.swing.JLabel" name="btnExit">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -264,6 +299,9 @@
                     </Property>
                     <Property name="opaque" type="boolean" value="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnExitMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="btnShop">
                   <Properties>

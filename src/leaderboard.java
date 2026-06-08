@@ -30,11 +30,9 @@ public class leaderboard extends javax.swing.JFrame {
      */
     public leaderboard() {
     initComponents();
+    rapikanLayoutLeaderboard();
     
-    setTitle("LEADERBOARD");
-    setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
-
-    setLocationRelativeTo(null);
+    GameWindow.centerContent(this, panelUtama, "LEADERBOARD");
 
     db = new KoneksiDB();
 
@@ -48,8 +46,9 @@ public class leaderboard extends javax.swing.JFrame {
     
     public leaderboard(String usernameLogin) {
         initComponents();
+        rapikanLayoutLeaderboard();
         
-        setLocationRelativeTo(null);
+        GameWindow.centerContent(this, panelUtama, "LEADERBOARD");
 
         db = new KoneksiDB();
 
@@ -59,6 +58,26 @@ public class leaderboard extends javax.swing.JFrame {
 
         tampilkanTop10Leaderboard();
         tampilkanPosisiUser();
+    }
+
+    private void rapikanLayoutLeaderboard() {
+        panelUtama.setLayout(null);
+        panelUtama.setPreferredSize(new java.awt.Dimension(760, 575));
+
+        jPanel2.setVisible(false);
+        jPanel3.setVisible(false);
+
+        lblBurger1.setBounds(200, 18, 48, 43);
+        lblJudul.setBounds(270, 14, 300, 55);
+        lblBurger.setBounds(585, 18, 48, 43);
+
+        panelInfoUser.setBounds(55, 86, 650, 100);
+        panelLeaderboard.setBounds(55, 202, 420, 300);
+        panelPosisiKamu.setBounds(490, 202, 235, 300);
+
+        btnResetData.setBounds(75, 520, 150, 38);
+        btnStatistikGame.setBounds(292, 520, 180, 38);
+        lblMainMenu.setBounds(585, 520, 125, 38);
     }
     
     private void aturHeaderTable() {
@@ -741,23 +760,17 @@ public class leaderboard extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStatistikGameMouseClicked
 
     private void lblMainMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMainMenuMouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Nanti diarahkan ke Main Menu");
-        
-        //nanti ganti jadi gini
-//        MainMenuFrame form_menu = new MainMenuFrame();
-//        form_menu.setVisible(true);
-//        this.setVisible(false);
-
     }//GEN-LAST:event_lblMainMenuMouseClicked
 
     private void lblMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblMainMenuActionPerformed
-        // TODO add your handling code here:
-        MainMenu mainmenu = new MainMenu();
-        this.setVisible(false);
-        mainmenu.setVisible(true);
-
+        bukaMainMenu();
     }//GEN-LAST:event_lblMainMenuActionPerformed
+
+    private void bukaMainMenu() {
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.setVisible(true);
+        dispose();
+    }
 
     /**
      * @param args the command line arguments

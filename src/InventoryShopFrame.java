@@ -35,10 +35,10 @@ public class InventoryShopFrame extends javax.swing.JFrame {
     public InventoryShopFrame() {
     initComponents();
     
-    setTitle("INVENTORY & SHOP");
-    setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
+    GameWindow.centerContent(this, jPanel2, "INVENTORY & SHOP");
 
-    //LBsaldo.setText("Saldo : " + saldo);
+    Sjumlah.setModel(new javax.swing.SpinnerNumberModel(1, 1, 99, 1));
+
     loadSaldo();
     loadBahan();
 
@@ -100,6 +100,87 @@ public class InventoryShopFrame extends javax.swing.JFrame {
 
     TableBahan.getTableHeader().repaint();
 }
+
+    private void pastikanDataShop(Connection con) throws Exception {
+        try (java.sql.Statement st = con.createStatement()) {
+            st.executeUpdate(
+                    "CREATE TABLE IF NOT EXISTS shop_data ("
+                    + "id_data INT NOT NULL PRIMARY KEY, "
+                    + "saldo INT NOT NULL DEFAULT 500)"
+            );
+            st.executeUpdate(
+                    "CREATE TABLE IF NOT EXISTS inventory ("
+                    + "id_bahan INT NOT NULL PRIMARY KEY, "
+                    + "nama_bahan VARCHAR(50) NOT NULL UNIQUE, "
+                    + "stok INT NOT NULL DEFAULT 0, "
+                    + "harga INT NOT NULL)"
+            );
+            st.executeUpdate(
+                    "INSERT IGNORE INTO shop_data (id_data, saldo) VALUES (1, 500)"
+            );
+            st.executeUpdate(
+                    "INSERT IGNORE INTO inventory (id_bahan, nama_bahan, stok, harga) VALUES "
+                    + "(1, 'Bread', 10, 150), "
+                    + "(2, 'Patty', 4, 200), "
+                    + "(3, 'Onion', 10, 50), "
+                    + "(4, 'Egg', 5, 100), "
+                    + "(5, 'Cheese', 4, 150), "
+                    + "(6, 'Lettuce', 10, 50), "
+                    + "(7, 'Tomato', 6, 60), "
+                    + "(8, 'Salmon', 3, 300)"
+            );
+        }
+    }
+
+    private boolean isPilihBahan(String bahan) {
+        return bahan == null || bahan.contains("Pilih Bahan");
+    }
+
+    private int getHargaBahan(String bahan) {
+        switch (bahan) {
+            case "Bread":
+                return 150;
+            case "Patty":
+                return 200;
+            case "Onion":
+                return 50;
+            case "Egg":
+                return 100;
+            case "Cheese":
+                return 150;
+            case "Lettuce":
+                return 50;
+            case "Tomato":
+                return 60;
+            case "Salmon":
+                return 300;
+            default:
+                return 0;
+        }
+    }
+
+    private int getIdBahan(String bahan) {
+        switch (bahan) {
+            case "Bread":
+                return 1;
+            case "Patty":
+                return 2;
+            case "Onion":
+                return 3;
+            case "Egg":
+                return 4;
+            case "Cheese":
+                return 5;
+            case "Lettuce":
+                return 6;
+            case "Tomato":
+                return 7;
+            case "Salmon":
+                return 8;
+            default:
+                return 0;
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -436,6 +517,10 @@ public class InventoryShopFrame extends javax.swing.JFrame {
     private void loadSaldo() {
     try {
         Connection con = new KoneksiDB().getConnection();
+        if (con == null) {
+            return;
+        }
+        pastikanDataShop(con);
 
         String sql =
                 "SELECT saldo FROM shop_data WHERE id_data = 1";
@@ -468,9 +553,13 @@ public class InventoryShopFrame extends javax.swing.JFrame {
 
         Connection con =
                 new KoneksiDB().getConnection();
+        if (con == null) {
+            return;
+        }
+        pastikanDataShop(con);
 
         String sql =
-                "SELECT * FROM bahan";
+                "SELECT id_bahan, nama_bahan, stok, harga FROM inventory ORDER BY id_bahan";
 
         PreparedStatement ps =
                 con.prepareStatement(sql);
@@ -498,36 +587,12 @@ public class InventoryShopFrame extends javax.swing.JFrame {
     private void CBpilihbahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBpilihbahanActionPerformed
         // TODO add your handling code here:
         String bahan = CBpilihbahan.getSelectedItem().toString();
-        int harga = 0;
-        if (bahan.equals("Pilih Bahan")) {
+        if (isPilihBahan(bahan)) {
             TFhargasatuan.setText("");
             TFtotalharga.setText("");
             return;
         }
-        else if (bahan.equals("Bread")) {
-            harga = 150;
-        }
-        else if (bahan.equals("Patty")) {
-            harga = 200;
-        }
-        else if (bahan.equals("Onion")) {
-            harga = 50;
-        }
-        else if (bahan.equals("Egg")) {
-            harga = 100;
-        }
-        else if (bahan.equals("Cheese")) {
-            harga = 150;
-        }
-        else if (bahan.equals("Lettuce")) {
-            harga = 50;
-        }
-        else if (bahan.equals("Tomato")) {
-            harga = 60;
-        }
-        else if (bahan.equals("Salmon")) {
-            harga = 300;
-        }
+        int harga = getHargaBahan(bahan);
         TFhargasatuan.setText(String.valueOf(harga));
         int jumlah = (Integer) Sjumlah.getValue();
         int total = harga * jumlah;
@@ -543,7 +608,7 @@ public class InventoryShopFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String bahan = CBpilihbahan.getSelectedItem().toString();
 
-    if (bahan.equals("Pilih Bahan")) {
+    if (isPilihBahan(bahan)) {
 
         JOptionPane.showMessageDialog(this,
         "Pilih bahan terlebih dahulu!");
@@ -552,12 +617,18 @@ public class InventoryShopFrame extends javax.swing.JFrame {
     }
 
     int jumlah = (Integer) Sjumlah.getValue();
+    if (jumlah <= 0) {
+        JOptionPane.showMessageDialog(this,
+        "Jumlah beli minimal 1!");
 
-    int harga =
-    Integer.parseInt(TFhargasatuan.getText());
+        return;
+    }
 
-    int total =
-    Integer.parseInt(TFtotalharga.getText());
+    int harga = getHargaBahan(bahan);
+
+    int total = harga * jumlah;
+    TFhargasatuan.setText(String.valueOf(harga));
+    TFtotalharga.setText(String.valueOf(total));
 
     // cek saldo cukup atau tidak
     if (saldo < total) {
@@ -575,6 +646,10 @@ public class InventoryShopFrame extends javax.swing.JFrame {
 
     Connection con =
             new KoneksiDB().getConnection();
+    if (con == null) {
+        return;
+    }
+    pastikanDataShop(con);
 
     String sqlSaldo =
             "UPDATE shop_data SET saldo=? WHERE id_data=1";
@@ -585,71 +660,25 @@ public class InventoryShopFrame extends javax.swing.JFrame {
     psSaldo.setInt(1, saldo);
     psSaldo.executeUpdate();
 
+    String sqlInventory =
+            "INSERT INTO inventory (id_bahan, nama_bahan, stok, harga) "
+            + "VALUES (?, ?, ?, ?) "
+            + "ON DUPLICATE KEY UPDATE stok = stok + VALUES(stok), harga = VALUES(harga)";
+
+    PreparedStatement psInventory =
+            con.prepareStatement(sqlInventory);
+
+    psInventory.setInt(1, getIdBahan(bahan));
+    psInventory.setString(2, bahan);
+    psInventory.setInt(3, jumlah);
+    psInventory.setInt(4, harga);
+    psInventory.executeUpdate();
+
     } catch (Exception e) {
 
         JOptionPane.showMessageDialog(this,
                 e.getMessage());
-    }
-
-    LBsaldo.setText("Saldo : Rp " + saldo);
-
-    DefaultTableModel model =
-    (DefaultTableModel) TableBahan.getModel();
-
-    boolean ditemukan = false;
-
-    for (int i = 0; i < model.getRowCount(); i++) {
-
-        String namaBahan =
-        model.getValueAt(i, 1).toString();
-
-        if (namaBahan.equals(bahan)) {
-
-            int stokLama =
-            Integer.parseInt(
-            model.getValueAt(i, 2).toString());
-
-            int stokBaru = stokLama + jumlah;
-
-            model.setValueAt(stokBaru, i, 2);
-
-            ditemukan = true;
-
-            try {
-
-            Connection con =
-                    new KoneksiDB().getConnection();
-
-            String sql =
-                    "UPDATE bahan SET stok=? WHERE nama_bahan=?";
-
-            PreparedStatement ps =
-                    con.prepareStatement(sql);
-
-            ps.setInt(1, stokBaru);
-            ps.setString(2, bahan);
-
-            ps.executeUpdate();
-
-            } catch (Exception e) {
-
-                JOptionPane.showMessageDialog(this,
-                        e.getMessage());
-            }
-
-            break;
-        }
-    }
-
-    if (!ditemukan) {
-
-        int id = model.getRowCount() + 1;
-
-        model.addRow(new Object[]{
-            id,
-            bahan,
-            jumlah
-        });
+        return;
     }
 
     loadSaldo();
@@ -680,32 +709,15 @@ public class InventoryShopFrame extends javax.swing.JFrame {
     Integer.parseInt(
     model.getValueAt(baris, 2).toString());
 
-    int harga = 0;
+    int harga =
+    Integer.parseInt(
+    model.getValueAt(baris, 3).toString());
 
-    // harga bahan
-    if (bahan.equals("Bread")) {
-        harga = 100;
-    }
-    else if (bahan.equals("Patty")) {
-        harga = 200;
-    }
-    else if (bahan.equals("Onion")) {
-        harga = 50;
-    }
-    else if (bahan.equals("Egg")) {
-        harga = 100;
-    }
-    else if (bahan.equals("Cheese")) {
-        harga = 150;
-    }
-    else if (bahan.equals("Lettuce")) {
-        harga = 50;
-    }
-    else if (bahan.equals("Tomato")) {
-        harga = 60;
-    }
-    else if (bahan.equals("Salmon")) {
-        harga = 300;
+    if (stokLama <= 0) {
+        JOptionPane.showMessageDialog(this,
+        "Stok bahan sudah kosong!");
+
+        return;
     }
 
     // stok dikurangi 1
@@ -718,6 +730,10 @@ public class InventoryShopFrame extends javax.swing.JFrame {
 
     Connection con =
             new KoneksiDB().getConnection();
+    if (con == null) {
+        return;
+    }
+    pastikanDataShop(con);
 
     String sql =
             "UPDATE shop_data SET saldo=? WHERE id_data=1";
@@ -729,23 +745,28 @@ public class InventoryShopFrame extends javax.swing.JFrame {
 
     ps.executeUpdate();
 
+    String sqlInventory =
+            "UPDATE inventory SET stok=? WHERE nama_bahan=?";
+
+    PreparedStatement psInventory =
+            con.prepareStatement(sqlInventory);
+
+    psInventory.setInt(1, stokBaru);
+    psInventory.setString(2, bahan);
+    psInventory.executeUpdate();
+
     } catch (Exception e) {
 
         JOptionPane.showMessageDialog(this,
                 e.getMessage());
+        return;
     }
 
 
     LBsaldo.setText("Saldo : Rp " + saldo);
 
-    if (stokBaru > 0) {
-
-        model.setValueAt(stokBaru, baris, 2);
-
-    } else {
-
-        model.removeRow(baris);
-    }
+    loadSaldo();
+    loadBahan();
 
     JOptionPane.showMessageDialog(this,
     "Bahan berhasil dijual!");
