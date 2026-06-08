@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import javax.swing.ImageIcon;
 /**
  *
  * @author hfz
@@ -15,20 +14,14 @@ import javax.swing.ImageIcon;
 public class loginburger extends javax.swing.JFrame {
     int xx, xy;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(loginburger.class.getName());
-    KoneksiDB db = new KoneksiDB();
-    public String usernameLogged;
-    
+
     /**
      * Creates new form loginburger
      */
     public loginburger() {
         initComponents();
-        btnUbahPassword.setVisible(false);
-        btnHapusAkun.setVisible(false);
-        setTitle("LOGIN");
-        setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
         setLocationRelativeTo(null);
-
+        
         txtUsername.setText("Username");
         txtPassword.setText("Password");
     }
@@ -231,7 +224,7 @@ public class loginburger extends javax.swing.JFrame {
         }
 
         try {
-            Connection conn = db.getConnection();
+            Connection conn = Koneksi.getConnection();
 
             String sql = "INSERT INTO akun (username, password) VALUES (?, ?)";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -239,30 +232,6 @@ public class loginburger extends javax.swing.JFrame {
             pst.setString(2, password);
 
             pst.executeUpdate();
-
-            PreparedStatement getId =
-                conn.prepareStatement(
-                    "SELECT id FROM akun WHERE username = ?"
-                );
-
-            getId.setString(1, username);
-
-            ResultSet rsId = getId.executeQuery();
-
-            if(rsId.next()){
-
-                int idAkun = rsId.getInt("id");
-
-                PreparedStatement stat =
-                    conn.prepareStatement(
-                        "INSERT INTO player_stats "
-                    + "(id_akun, jumlah_burger_dibuat, skor, koin) "
-                    + "VALUES (?,0,0,0)"
-                    );
-
-                stat.setInt(1, idAkun);
-                stat.executeUpdate();
-            }
 
             JOptionPane.showMessageDialog(this, "Akun berhasil didaftarkan!");
 
@@ -284,7 +253,7 @@ public class loginburger extends javax.swing.JFrame {
         }
 
         try {
-            Connection conn = db.getConnection();
+            Connection conn = Koneksi.getConnection();
 
             String sql = "UPDATE akun SET password = ? WHERE username = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
@@ -308,18 +277,7 @@ public class loginburger extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUbahPasswordActionPerformed
 
     private void btnKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKeluarMouseClicked
-        int konfirmasi = JOptionPane.showConfirmDialog(
-                this,
-                "Anda yakin ingin keluar?",
-                "Konfirmasi Keluar",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE
-        );
-
-        if (konfirmasi == JOptionPane.YES_OPTION) {
-            dispose();
-            System.exit(0);
-        }
+        dispose();
     }//GEN-LAST:event_btnKeluarMouseClicked
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
@@ -336,36 +294,24 @@ public class loginburger extends javax.swing.JFrame {
         }
         
         try {
-            Connection conn = db.getConnection();
+            Connection conn = Koneksi.getConnection();
 
-            String sql = "SELECT id, username, password FROM akun WHERE username = ?";
+            String sql = "SELECT * FROM akun WHERE username = ? AND password = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, username);
+            pst.setString(2, password);
             
             ResultSet rs = pst.executeQuery();
 
             if (rs.next()) {
-                String passwordDb = rs.getString("password");
-                if (!password.equals(passwordDb)) {
-                    JOptionPane.showMessageDialog(this, "Password salah!");
-                    return;
-                }
-
-                 session.idUser = rs.getInt("id");
-                 session.username = rs.getString("username");
-
-                
                 JOptionPane.showMessageDialog(this, "Login berhasil! Selamat datang " + username);
-                MainMenu mainmenu = new MainMenu();
-                mainmenu.setVisible(true);
-                this.setVisible(false);
 
                 // aktipin menu
                 // new MenuUtama().setVisible(true);
                 // this.dispose();
 
             } else {
-                JOptionPane.showMessageDialog(this, "Username dan password salah!");
+                JOptionPane.showMessageDialog(this, "Username atau password salah!");
             }
             
         } catch (Exception e) {
@@ -390,7 +336,7 @@ public class loginburger extends javax.swing.JFrame {
 
         if (konfirmasi == JOptionPane.YES_OPTION) {
             try {
-                Connection conn = db.getConnection();
+                Connection conn = Koneksi.getConnection();
 
                 String sql = "DELETE FROM akun WHERE username = ?";
                 PreparedStatement pst = conn.prepareStatement(sql);

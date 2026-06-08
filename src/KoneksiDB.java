@@ -22,7 +22,7 @@ public class KoneksiDB {
         String id, pass, url, driver;
         id = "root";
         pass = "";
-        url = "jdbc:mysql://localhost:3306/burgergame?userTimezone=true&server=UTC";
+        url = "jdbc:mysql://localhost:3306/burgergame?serverTimezone=UTC&useSSL=false";
         driver = "com.mysql.cj.jdbc.Driver";
 
         try {

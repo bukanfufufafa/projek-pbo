@@ -22,6 +22,7 @@ public class Order extends javax.swing.JFrame {
      */
     public Order() {
         initComponents();
+        GameWindow.apply(this, "RECIPE BOOK");
         kon = new KoneksiDB();
 
         tampildata();

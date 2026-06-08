@@ -17,8 +17,7 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
-        setTitle("MENU");
-        setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
+        GameWindow.apply(this, "MENU");
     }
 
     /**
@@ -38,6 +37,7 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btnPlay = new javax.swing.JLabel();
         btnLeaderboard = new javax.swing.JLabel();
+        btnProfile = new javax.swing.JLabel();
         btnExit = new javax.swing.JLabel();
         btnShop = new javax.swing.JLabel();
         btnResep = new javax.swing.JLabel();
@@ -92,6 +92,20 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        btnProfile.setBackground(new java.awt.Color(96, 39, 10));
+        btnProfile.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        btnProfile.setForeground(new java.awt.Color(255, 255, 255));
+        btnProfile.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnProfile.setText("PROFILE");
+        btnProfile.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 52, 33), new java.awt.Color(146, 91, 53), new java.awt.Color(44, 16, 3), new java.awt.Color(60, 25, 5)));
+        btnProfile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProfile.setOpaque(true);
+        btnProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProfileMouseClicked(evt);
+            }
+        });
+
         btnExit.setBackground(new java.awt.Color(96, 39, 10));
         btnExit.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         btnExit.setForeground(new java.awt.Color(255, 255, 255));
@@ -100,6 +114,11 @@ public class MainMenu extends javax.swing.JFrame {
         btnExit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 52, 33), new java.awt.Color(146, 91, 53), new java.awt.Color(44, 16, 3), new java.awt.Color(60, 25, 5)));
         btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExit.setOpaque(true);
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnExitMouseClicked(evt);
+            }
+        });
 
         btnShop.setBackground(new java.awt.Color(96, 39, 10));
         btnShop.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -138,6 +157,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPlay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLeaderboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnShop, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                     .addComponent(btnResep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -150,6 +170,8 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLeaderboard, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnShop, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -234,6 +256,17 @@ public class MainMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnLeaderboardMouseClicked
 
+    private void btnProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfileMouseClicked
+        Profile profile = new Profile();
+        profile.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnProfileMouseClicked
+
+    private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
+        dispose();
+        System.exit(0);
+    }//GEN-LAST:event_btnExitMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -273,6 +306,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel btnExit;
     private javax.swing.JLabel btnLeaderboard;
     private javax.swing.JLabel btnPlay;
+    private javax.swing.JLabel btnProfile;
     private javax.swing.JLabel btnResep;
     private javax.swing.JLabel btnShop;
     private javax.swing.JLabel jLabel4;
