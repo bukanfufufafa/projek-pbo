@@ -7,7 +7,7 @@
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-
+import javax.swing.ImageIcon;
 /**
  *
  * @author Salsabila Ramadhania
@@ -25,6 +25,8 @@ public class statistikGame extends javax.swing.JFrame {
      */
     public statistikGame() {
         initComponents();
+        setTitle("STATISTIK GAME");
+        setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
         
         setLocationRelativeTo(null);
         

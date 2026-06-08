@@ -53,10 +53,13 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     //tes
     public gameplay() {
     initComponents();
+    setTitle("BURGER RUSH");
+    setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
     //setSize(800, 600);
     setLocationRelativeTo(null);
     System.out.println("ID User : " + session.idUser);
     System.out.println("Username : " + session.username);
+    Akun.setText(session.username);
     //image
     breadImg = new ImageIcon(
         getClass().getResource("/asset/bun.png")
@@ -212,7 +215,9 @@ void startTimer() {
 
                 } else {
                     savePlayerStats();
-                    System.exit(0);
+                    MainMenu mainmenu = new MainMenu();
+                    mainmenu.setVisible(true);
+                    dispose();
                 }
             }
         }
@@ -312,12 +317,43 @@ void serveBurger() {
 
     } else {
 
-        JOptionPane.showMessageDialog(
-                this,
-                "Wrong Burger!\nGame Over"
-        );
         savePlayerStats();
-        System.exit(0);
+        int pilihan = JOptionPane.showConfirmDialog(
+                        null,
+                        "Pesanan salah!\nMain Lagi?",
+                        "Game Over",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (pilihan == JOptionPane.YES_OPTION) {
+
+                    // reset game
+                    savePlayerStats();
+                   
+                    score = 0;
+                    coin = 0;
+                    time = 100;
+                    
+                    burger.clear();
+                    order.clear();
+
+                    scoreField.setText("0");
+                    jTextPane1.setText("0");
+
+                    timeBar.setValue(time);
+
+                    generateOrder();
+
+                    repaint();
+
+                    gameTimer.start();
+
+                } else {
+                    savePlayerStats();
+                    MainMenu mainmenu = new MainMenu();
+                    mainmenu.setVisible(true);
+                    this.setVisible(false);
+                }
     }
 }
 
@@ -472,6 +508,7 @@ public void paint(Graphics g) {
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
+        jComboBox1 = new javax.swing.JComboBox<>();
         breadButton = new javax.swing.JButton();
         lettuceButton = new javax.swing.JButton();
         pattyButton = new javax.swing.JButton();
@@ -491,10 +528,22 @@ public void paint(Graphics g) {
         eggButton = new javax.swing.JButton();
         salmonButton = new javax.swing.JButton();
         compalinText = new javax.swing.JLabel();
+        menuText1 = new javax.swing.JLabel();
+        menuText2 = new javax.swing.JLabel();
+        menuText3 = new javax.swing.JLabel();
+        menuText4 = new javax.swing.JLabel();
+        menuText5 = new javax.swing.JLabel();
+        menuText6 = new javax.swing.JLabel();
+        menuText7 = new javax.swing.JLabel();
+        menuText8 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        Akun = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuOption = new javax.swing.JMenu();
         mainMenu = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        restartMenu = new javax.swing.JMenuItem();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(39, 18, 10));
@@ -513,7 +562,7 @@ public void paint(Graphics g) {
         lettuceButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icon/lettuce-icon.png"))); // NOI18N
         lettuceButton.setBorderPainted(false);
         lettuceButton.setContentAreaFilled(false);
-        getContentPane().add(lettuceButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 326, -1, -1));
+        getContentPane().add(lettuceButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
 
         pattyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icon/beef-icon.png"))); // NOI18N
         pattyButton.setBorderPainted(false);
@@ -536,13 +585,13 @@ public void paint(Graphics g) {
             }
         });
         cheeseButton.addActionListener(this::cheeseButtonActionPerformed);
-        getContentPane().add(cheeseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 326, -1, -1));
+        getContentPane().add(cheeseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
 
         serveaButton.setText("Serve");
-        getContentPane().add(serveaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(391, 326, -1, -1));
+        getContentPane().add(serveaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, -1, -1));
 
-        menuText.setText("Order");
-        getContentPane().add(menuText, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 10, 72, -1));
+        menuText.setText("Tomato");
+        getContentPane().add(menuText, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 50, -1));
         getContentPane().add(timeBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 10, 198, 12));
 
         scoreText.setText("Score");
@@ -554,7 +603,7 @@ public void paint(Graphics g) {
 
         menuList.setName("fddvvdvd"); // NOI18N
         menuList.addActionListener(this::menuListActionPerformed);
-        getContentPane().add(menuList, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 36, 78, 118));
+        getContentPane().add(menuList, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, 78, 118));
 
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -568,7 +617,7 @@ public void paint(Graphics g) {
         tomatoButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icon/tomato-icon.png"))); // NOI18N
         tomatoButton.setBorderPainted(false);
         tomatoButton.setContentAreaFilled(false);
-        getContentPane().add(tomatoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 326, -1, -1));
+        getContentPane().add(tomatoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, -1, -1));
 
         trashButton.setText("Trash");
         trashButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -577,7 +626,7 @@ public void paint(Graphics g) {
             }
         });
         trashButton.addActionListener(this::trashButtonActionPerformed);
-        getContentPane().add(trashButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(391, 285, -1, -1));
+        getContentPane().add(trashButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, -1, -1));
 
         eggButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/icon/egg-icon.png"))); // NOI18N
         eggButton.setBorderPainted(false);
@@ -588,23 +637,57 @@ public void paint(Graphics g) {
         salmonButton.setBorderPainted(false);
         salmonButton.setContentAreaFilled(false);
         salmonButton.addActionListener(this::salmonButtonActionPerformed);
-        getContentPane().add(salmonButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 326, -1, -1));
+        getContentPane().add(salmonButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, -1, -1));
 
         compalinText.setBackground(new java.awt.Color(251, 227, 189));
         compalinText.setFont(new java.awt.Font("Eras Bold ITC", 1, 18)); // NOI18N
-        compalinText.setForeground(new java.awt.Color(255, 255, 255));
+        compalinText.setForeground(new java.awt.Color(255, 51, 51));
         compalinText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         compalinText.setText("tes");
         getContentPane().add(compalinText, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 30, 190, -1));
 
+        menuText1.setText("Order");
+        getContentPane().add(menuText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 72, -1));
+
+        menuText2.setText("Bread");
+        getContentPane().add(menuText2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 40, -1));
+
+        menuText3.setText("Patty");
+        getContentPane().add(menuText3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 40, -1));
+
+        menuText4.setText("Onion");
+        getContentPane().add(menuText4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 40, -1));
+
+        menuText5.setText("Egg");
+        getContentPane().add(menuText5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 40, -1));
+
+        menuText6.setText("Lettuce");
+        getContentPane().add(menuText6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 40, -1));
+
+        menuText7.setText("Cheese");
+        getContentPane().add(menuText7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, 40, -1));
+
+        menuText8.setText("Tomato");
+        getContentPane().add(menuText8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 50, -1));
+
+        jPanel1.setBackground(new java.awt.Color(51, 255, 51));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        Akun.setText("Akun");
+        jPanel1.add(Akun);
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 60));
+
         menuOption.setText("Menu");
+        menuOption.addActionListener(this::menuOptionActionPerformed);
 
         mainMenu.setText("Main Menu");
         mainMenu.addActionListener(this::mainMenuActionPerformed);
         menuOption.add(mainMenu);
 
-        jMenuItem2.setText("Restart");
-        menuOption.add(jMenuItem2);
+        restartMenu.setText("Restart");
+        restartMenu.addActionListener(this::restartMenuActionPerformed);
+        menuOption.add(restartMenu);
 
         jMenuBar1.add(menuOption);
 
@@ -657,7 +740,37 @@ public void paint(Graphics g) {
 
     private void mainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainMenuActionPerformed
         // TODO add your handling code here:
+        MainMenu mainmenu = new MainMenu();
+        mainmenu.setVisible(true);
+        this.setVisible(false);
+        
     }//GEN-LAST:event_mainMenuActionPerformed
+
+    private void menuOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuOptionActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menuOptionActionPerformed
+
+    private void restartMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartMenuActionPerformed
+        // TODO add your handling code here:
+        score = 0;
+                    coin = 0;
+                    time = 100;
+                    
+                    burger.clear();
+                    order.clear();
+
+                    scoreField.setText("0");
+                    jTextPane1.setText("0");
+
+                    timeBar.setValue(time);
+
+                    generateOrder();
+
+                    repaint();
+
+                    gameTimer.start();
+    }//GEN-LAST:event_restartMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -685,14 +798,16 @@ public void paint(Graphics g) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Akun;
     private javax.swing.JButton breadButton;
     private javax.swing.JButton cheeseButton;
     private javax.swing.JLabel compalinText;
     private javax.swing.JLabel conText;
     private javax.swing.JButton eggButton;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JButton lettuceButton;
@@ -700,8 +815,17 @@ public void paint(Graphics g) {
     private java.awt.List menuList;
     private javax.swing.JMenu menuOption;
     private javax.swing.JLabel menuText;
+    private javax.swing.JLabel menuText1;
+    private javax.swing.JLabel menuText2;
+    private javax.swing.JLabel menuText3;
+    private javax.swing.JLabel menuText4;
+    private javax.swing.JLabel menuText5;
+    private javax.swing.JLabel menuText6;
+    private javax.swing.JLabel menuText7;
+    private javax.swing.JLabel menuText8;
     private javax.swing.JButton onionButton;
     private javax.swing.JButton pattyButton;
+    private javax.swing.JMenuItem restartMenu;
     private javax.swing.JButton salmonButton;
     private javax.swing.JTextField scoreField;
     private javax.swing.JLabel scoreText;
