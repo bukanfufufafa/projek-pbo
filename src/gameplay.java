@@ -55,7 +55,7 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     initComponents();
     setTitle("BURGER RUSH");
     setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
-    setSize(800, 600);
+    //setSize(800, 600);
     setLocationRelativeTo(null);
     System.out.println("ID User : " + session.idUser);
     System.out.println("Username : " + session.username);
@@ -109,8 +109,15 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     timeBar.setMaximum(100);
     timeBar.setValue(100);
 
+    coin = loadKoinFromDB();
+
     scoreField.setText("0");
-    jTextPane1.setText("0");
+    scoreField.setEditable(false);
+    scoreField.setFocusable(false);
+
+    jTextPane1.setText(String.valueOf(coin));
+    jTextPane1.setEditable(false);
+    jTextPane1.setFocusable(false);
 
     generateOrder();
 
@@ -119,6 +126,21 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
 
     
     
+    private int loadKoinFromDB() {
+    try {
+        String sql = "SELECT koin FROM player_stats WHERE id_akun = ?";
+        PreparedStatement ps = db.getConnection().prepareStatement(sql);
+        ps.setInt(1, session.idUser);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("koin");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return 0;
+}
+
     private void savePlayerStats() {
 
     try {
@@ -194,16 +216,16 @@ void startTimer() {
 
                     // reset game
                     savePlayerStats();
-                   
+
                     score = 0;
-                    coin = 0;
+                    coin = loadKoinFromDB();
                     time = 100;
-                    
+
                     burger.clear();
                     order.clear();
 
                     scoreField.setText("0");
-                    jTextPane1.setText("0");
+                    jTextPane1.setText(String.valueOf(coin));
 
                     timeBar.setValue(time);
 
@@ -317,7 +339,6 @@ void serveBurger() {
 
     } else {
 
-        savePlayerStats();
         int pilihan = JOptionPane.showConfirmDialog(
                         null,
                         "Pesanan salah!\nMain Lagi?",
@@ -331,14 +352,14 @@ void serveBurger() {
                     savePlayerStats();
                    
                     score = 0;
-                    coin = 0;
+                    coin = loadKoinFromDB();
                     time = 100;
                     
                     burger.clear();
                     order.clear();
 
                     scoreField.setText("0");
-                    jTextPane1.setText("0");
+                    jTextPane1.setText(String.valueOf(coin));
 
                     timeBar.setValue(time);
 
@@ -588,6 +609,7 @@ public void paint(Graphics g) {
         cheeseButton.addActionListener(this::cheeseButtonActionPerformed);
         getContentPane().add(cheeseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, -1, -1));
 
+        serveaButton.setBackground(new java.awt.Color(255, 255, 204));
         serveaButton.setText("Serve");
         getContentPane().add(serveaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, -1, -1));
 
@@ -626,6 +648,7 @@ public void paint(Graphics g) {
         tomatoButton.setContentAreaFilled(false);
         getContentPane().add(tomatoButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, -1, -1));
 
+        trashButton.setBackground(new java.awt.Color(255, 255, 204));
         trashButton.setText("Trash");
         trashButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -648,7 +671,7 @@ public void paint(Graphics g) {
 
         compalinText.setBackground(new java.awt.Color(251, 227, 189));
         compalinText.setFont(new java.awt.Font("Eras Bold ITC", 1, 18)); // NOI18N
-        compalinText.setForeground(new java.awt.Color(255, 51, 51));
+        compalinText.setForeground(new java.awt.Color(255, 255, 255));
         compalinText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         compalinText.setText("tes");
         getContentPane().add(compalinText, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 30, 190, -1));
@@ -693,8 +716,8 @@ public void paint(Graphics g) {
         menuText8.setText("Tomato");
         getContentPane().add(menuText8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 50, -1));
 
-        jPanel1.setBackground(new java.awt.Color(51, 255, 51));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         Akun.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Akun.setText("Akun");
@@ -781,14 +804,14 @@ public void paint(Graphics g) {
     private void restartMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartMenuActionPerformed
         // TODO add your handling code here:
         score = 0;
-                    coin = 0;
+                    coin = loadKoinFromDB();
                     time = 100;
                     
                     burger.clear();
                     order.clear();
 
                     scoreField.setText("0");
-                    jTextPane1.setText("0");
+                    jTextPane1.setText(String.valueOf(coin));
 
                     timeBar.setValue(time);
 

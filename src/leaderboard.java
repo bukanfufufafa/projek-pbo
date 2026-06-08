@@ -31,7 +31,7 @@ public class leaderboard extends javax.swing.JFrame {
     public leaderboard() {
     initComponents();
     rapikanLayoutLeaderboard();
-    
+    setLocationRelativeTo(null);
     GameWindow.centerContent(this, panelUtama, "LEADERBOARD");
 
     db = new KoneksiDB();

@@ -34,7 +34,7 @@ public class InventoryShopFrame extends javax.swing.JFrame {
      */
     public InventoryShopFrame() {
     initComponents();
-    
+    setLocationRelativeTo(null);
     setTitle("INVENTORY & SHOP");
     setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
 
