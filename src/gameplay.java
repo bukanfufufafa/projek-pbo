@@ -55,7 +55,7 @@ public class gameplay extends javax.swing.JFrame implements ActionListener{
     initComponents();
     setTitle("BURGER RUSH");
     setIconImage(new ImageIcon(getClass().getResource("/gameburger/image/burger icon 2.png")).getImage());
-    //setSize(800, 600);
+    setSize(800, 600);
     setLocationRelativeTo(null);
     System.out.println("ID User : " + session.idUser);
     System.out.println("Username : " + session.username);
@@ -538,6 +538,7 @@ public void paint(Graphics g) {
         menuText8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         Akun = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuOption = new javax.swing.JMenu();
         mainMenu = new javax.swing.JMenuItem();
@@ -590,14 +591,20 @@ public void paint(Graphics g) {
         serveaButton.setText("Serve");
         getContentPane().add(serveaButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, -1, -1));
 
+        menuText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuText.setForeground(new java.awt.Color(255, 255, 255));
         menuText.setText("Tomato");
         getContentPane().add(menuText, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 50, -1));
         getContentPane().add(timeBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(164, 10, 198, 12));
 
+        scoreText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        scoreText.setForeground(new java.awt.Color(255, 255, 255));
         scoreText.setText("Score");
         getContentPane().add(scoreText, new org.netbeans.lib.awtextra.AbsoluteConstraints(419, 10, 71, -1));
         getContentPane().add(scoreField, new org.netbeans.lib.awtextra.AbsoluteConstraints(419, 32, 96, -1));
 
+        conText.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        conText.setForeground(new java.awt.Color(255, 255, 255));
         conText.setText("Coin");
         getContentPane().add(conText, new org.netbeans.lib.awtextra.AbsoluteConstraints(419, 66, 37, -1));
 
@@ -646,37 +653,57 @@ public void paint(Graphics g) {
         compalinText.setText("tes");
         getContentPane().add(compalinText, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 30, 190, -1));
 
+        menuText1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuText1.setForeground(new java.awt.Color(255, 255, 255));
         menuText1.setText("Order");
         getContentPane().add(menuText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 72, -1));
 
+        menuText2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuText2.setForeground(new java.awt.Color(255, 255, 255));
         menuText2.setText("Bread");
         getContentPane().add(menuText2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 40, -1));
 
+        menuText3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuText3.setForeground(new java.awt.Color(255, 255, 255));
         menuText3.setText("Patty");
         getContentPane().add(menuText3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 40, -1));
 
+        menuText4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuText4.setForeground(new java.awt.Color(255, 255, 255));
         menuText4.setText("Onion");
         getContentPane().add(menuText4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 40, -1));
 
+        menuText5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuText5.setForeground(new java.awt.Color(255, 255, 255));
         menuText5.setText("Egg");
         getContentPane().add(menuText5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 40, -1));
 
+        menuText6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuText6.setForeground(new java.awt.Color(255, 255, 255));
         menuText6.setText("Lettuce");
         getContentPane().add(menuText6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 40, -1));
 
+        menuText7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuText7.setForeground(new java.awt.Color(255, 255, 255));
         menuText7.setText("Cheese");
-        getContentPane().add(menuText7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, 40, -1));
+        getContentPane().add(menuText7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, 60, -1));
 
+        menuText8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        menuText8.setForeground(new java.awt.Color(255, 255, 255));
         menuText8.setText("Tomato");
         getContentPane().add(menuText8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 50, -1));
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 51));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        Akun.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Akun.setText("Akun");
         jPanel1.add(Akun);
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 60));
+
+        jPanel2.setBackground(new java.awt.Color(102, 0, 0));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 460));
 
         menuOption.setText("Menu");
         menuOption.addActionListener(this::menuOptionActionPerformed);
@@ -808,6 +835,7 @@ public void paint(Graphics g) {
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JButton lettuceButton;

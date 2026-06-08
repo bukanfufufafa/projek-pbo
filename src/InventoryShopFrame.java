@@ -438,16 +438,20 @@ public class InventoryShopFrame extends javax.swing.JFrame {
         Connection con = new KoneksiDB().getConnection();
 
         String sql =
-                "SELECT saldo FROM shop_data WHERE id_data = 1";
+                "SELECT koin FROM player_stats WHERE id_akun = ?";
 
         PreparedStatement ps =
                 con.prepareStatement(sql);
+
+        ps.setInt(1, session.idUser);
 
         ResultSet rs =
                 ps.executeQuery();
 
         if (rs.next()) {
-            saldo = rs.getInt("saldo");
+            saldo = rs.getInt("koin");
+            LBsaldo.setText("Saldo : Rp " + saldo);
+        } else {
             LBsaldo.setText("Saldo : Rp " + saldo);
         }
 
@@ -470,7 +474,7 @@ public class InventoryShopFrame extends javax.swing.JFrame {
                 new KoneksiDB().getConnection();
 
         String sql =
-                "SELECT * FROM bahan";
+                "SELECT * FROM inventory";
 
         PreparedStatement ps =
                 con.prepareStatement(sql);
@@ -577,12 +581,13 @@ public class InventoryShopFrame extends javax.swing.JFrame {
             new KoneksiDB().getConnection();
 
     String sqlSaldo =
-            "UPDATE shop_data SET saldo=? WHERE id_data=1";
+            "UPDATE player_stats SET koin=? WHERE id_akun=?";
 
     PreparedStatement psSaldo =
             con.prepareStatement(sqlSaldo);
 
     psSaldo.setInt(1, saldo);
+    psSaldo.setInt(2, session.idUser);
     psSaldo.executeUpdate();
 
     } catch (Exception e) {
@@ -621,7 +626,7 @@ public class InventoryShopFrame extends javax.swing.JFrame {
                     new KoneksiDB().getConnection();
 
             String sql =
-                    "UPDATE bahan SET stok=? WHERE nama_bahan=?";
+                    "UPDATE inventory SET stok=? WHERE nama_bahan=?";
 
             PreparedStatement ps =
                     con.prepareStatement(sql);
@@ -720,12 +725,13 @@ public class InventoryShopFrame extends javax.swing.JFrame {
             new KoneksiDB().getConnection();
 
     String sql =
-            "UPDATE shop_data SET saldo=? WHERE id_data=1";
+            "UPDATE player_stats SET koin=? WHERE id_akun=?";
 
     PreparedStatement ps =
             con.prepareStatement(sql);
 
     ps.setInt(1, saldo);
+    ps.setInt(2, session.idUser);
 
     ps.executeUpdate();
 
@@ -745,6 +751,29 @@ public class InventoryShopFrame extends javax.swing.JFrame {
     } else {
 
         model.removeRow(baris);
+    }
+
+    // update stok di database
+    try {
+
+        Connection conStok =
+                new KoneksiDB().getConnection();
+
+        String sqlStok =
+                "UPDATE inventory SET stok=? WHERE nama_bahan=?";
+
+        PreparedStatement psStok =
+                conStok.prepareStatement(sqlStok);
+
+        psStok.setInt(1, stokBaru);
+        psStok.setString(2, bahan);
+
+        psStok.executeUpdate();
+
+    } catch (Exception e) {
+
+        JOptionPane.showMessageDialog(this,
+                e.getMessage());
     }
 
     JOptionPane.showMessageDialog(this,
